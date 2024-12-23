@@ -1,47 +1,35 @@
 package com.example.scpapp
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.scpapp.ui.theme.SCPAppTheme
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.ImageButton
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            SCPAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        // Set content view to the XML layout
+        setContentView(R.layout.activity_main)
+
+        // Initialize buttons
+        val scpButton: ImageButton = findViewById(R.id.button_scp)
+        val talesButton: ImageButton = findViewById(R.id.button_tales)
+        val settingsButton: ImageButton = findViewById(R.id.button_settings)
+
+        // Set click listeners
+        scpButton.setOnClickListener {
+            // Navigate to SCP screen
+            startActivity(Intent(this, SCPActivity::class.java))
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+        talesButton.setOnClickListener {
+            // Navigate to Tales screen
+            startActivity(Intent(this, TalesActivity::class.java))
+        }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    SCPAppTheme {
-        Greeting("Android")
+        settingsButton.setOnClickListener {
+            // Navigate to Settings screen
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
     }
 }

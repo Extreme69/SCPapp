@@ -13,6 +13,15 @@
         android:theme="@style/Theme.SCPApp"
         tools:targetApi="31">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TalesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SCPActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
