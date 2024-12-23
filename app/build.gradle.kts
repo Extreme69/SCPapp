@@ -35,6 +35,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        viewBinding = true
         compose = true
     }
 }
@@ -53,7 +54,12 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.gson) // Added Gson here
+    implementation(libs.gson)                               // Added Gson here
+    implementation (libs.retrofit)                          // Added Retrofit here
+    implementation (libs.converter.gson)                    // Added Gson converter here
+    implementation (libs.androidx.lifecycle.livedata.ktx)   // Added lifecycle livedata
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)  // Added lifecycle viewmodel
+    implementation(libs.logging.interceptor)                // Added logging
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
