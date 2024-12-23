@@ -10,6 +10,7 @@ class SCPViewModel(private val repository: SCPRepository = SCPRepository()) : Vi
 
     val scps = liveData(Dispatchers.IO) {
         try {
+            Log.d("SCPViewModel", "Fetching SCPs from repository...")
             val data = repository.fetchSCPs()
             Log.d("SCPViewModel", "Fetched SCPs: ${data?.size ?: 0}") // Log the size of the fetched list
             emit(data ?: emptyList()) // Emit data or empty list if null
