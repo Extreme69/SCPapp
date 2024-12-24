@@ -6,33 +6,39 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/imageViewSCPPhoto"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+    <!-- SCP ID and Title displayed at the top -->
     <TextView
         android:id="@+id/textViewSCPTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         android:layout_marginBottom="4dp"
-        app:layout_constraintStart_toEndOf="@id/imageViewSCPPhoto"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- SCP Classification displayed below the ID and Title -->
     <TextView
-        android:id="@+id/textViewSCPDescription"
+        android:id="@+id/textViewSCPClassification"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/textViewSCPTitle"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSCPTitle"
+        app:layout_constraintEnd_toStartOf="@id/textViewSCPRating" />
+
+    <!-- SCP Rating displayed to the right as far as possible -->
+    <TextView
+        android:id="@+id/textViewSCPRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toEndOf="@id/textViewSCPClassification"
         app:layout_constraintTop_toBottomOf="@id/textViewSCPTitle"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

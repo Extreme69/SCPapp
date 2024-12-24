@@ -1,6 +1,8 @@
 package com.example.scpapp
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -25,12 +27,18 @@ class SCPActivity : AppCompatActivity() {
 
         // Observe ViewModel for SCP list
         viewModel.scps.observe(this) { scpList ->
+            Log.d("SCPActivity", "Observed SCP list: ${scpList.size}")
             (binding.recyclerViewSCPs.adapter as SCPAdapter).submitList(scpList)
         }
 
         // Fetch SCPs when activity starts
         lifecycleScope.launch {
             viewModel.fetchSCPs()
+        }
+
+        // Set up the back button
+        binding.buttonBack.setOnClickListener {
+            onBackPressed() // This will take the user back to the previous activity
         }
     }
 

@@ -25,9 +25,14 @@ class SCPAdapter : ListAdapter<SCP, SCPAdapter.SCPViewHolder>(DiffCallback) {
 
     class SCPViewHolder(private val binding: ItemScpBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(scp: SCP) {
-            binding.textViewSCPTitle.text = scp.title
-            binding.textViewSCPDescription.text = scp.description
-            // Load image using a library like Glide/Picasso
+            // Bind the SCP ID and Title (e.g., "SCP-173: The Statue")
+            binding.textViewSCPTitle.text = "${scp.id}: ${scp.title}"
+
+            // Bind the SCP Classification (e.g., "Keter")
+            binding.textViewSCPClassification.text = scp.classification
+
+            // Bind the SCP Rating (e.g., "93")
+            binding.textViewSCPRating.text = scp.rating.toString()
         }
     }
 }
