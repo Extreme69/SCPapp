@@ -1,4 +1,4 @@
-package com.example.scpapp
+package com.example.scpapp.data
 import com.google.gson.annotations.SerializedName
 
 // SCP model class representing the data structure for SCPs

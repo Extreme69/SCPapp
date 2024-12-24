@@ -1,13 +1,14 @@
-package com.example.scpapp
+package com.example.scpapp.activity
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.scpapp.adapter.SCPAdapter
+import com.example.scpapp.viewmodel.SCPViewModel
 import com.example.scpapp.databinding.ActivityScpactivityBinding
 import kotlinx.coroutines.launch
 
@@ -38,7 +39,7 @@ class SCPActivity : AppCompatActivity() {
 
         // Set up the back button
         binding.buttonBack.setOnClickListener {
-            onBackPressed() // This will take the user back to the previous activity
+            onBackPressedDispatcher.onBackPressed() // This will take the user back to the previous activity
         }
     }
 

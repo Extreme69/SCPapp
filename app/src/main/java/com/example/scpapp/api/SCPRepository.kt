@@ -1,6 +1,7 @@
-package com.example.scpapp
+package com.example.scpapp.api
 
 import android.util.Log
+import com.example.scpapp.data.SCP
 
 class SCPRepository {
     private val api = RetrofitClient.api

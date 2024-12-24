@@ -1,4 +1,4 @@
-package com.example.scpapp
+package com.example.scpapp.data
 
 data class SCPResponse(
     val data: SCPResponseData

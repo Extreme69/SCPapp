@@ -1,8 +1,10 @@
-package com.example.scpapp
+package com.example.scpapp.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.example.scpapp.api.SCPRepository
+import com.example.scpapp.data.SCP
 import kotlinx.coroutines.Dispatchers
 
 // ViewModel for SCPs

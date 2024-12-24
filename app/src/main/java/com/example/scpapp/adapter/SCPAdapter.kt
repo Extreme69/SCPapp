@@ -1,10 +1,11 @@
-package com.example.scpapp
+package com.example.scpapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.scpapp.data.SCP
 import com.example.scpapp.databinding.ItemScpBinding
 
 class SCPAdapter : ListAdapter<SCP, SCPAdapter.SCPViewHolder>(DiffCallback) {
