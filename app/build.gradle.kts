@@ -60,6 +60,7 @@ dependencies {
     implementation (libs.androidx.lifecycle.livedata.ktx)   // Added lifecycle livedata
     implementation (libs.androidx.lifecycle.viewmodel.ktx)  // Added lifecycle viewmodel
     implementation(libs.logging.interceptor)                // Added logging
+    implementation (libs.github.glide)                      // Added glide
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
