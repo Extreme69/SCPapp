@@ -42,7 +42,7 @@ class SCPDetailActivity : AppCompatActivity() {
         detailViewModel.fetchSCPDetails(scpId).observe(this, Observer { details ->
             if (details != null) {
                 // Update UI with details
-                findViewById<TextView>(R.id.textViewSCPTitle).text = details.title
+                findViewById<TextView>(R.id.textViewSCPTitle).text = "${details.id}: ${details.title}"
 
                 // Set Classification Image
                 val classificationImageView = findViewById<ImageView>(R.id.imageViewSCPClassification)

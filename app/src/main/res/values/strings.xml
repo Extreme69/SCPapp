@@ -8,4 +8,5 @@
     <string name="scp_image_description">SCP image</string>
     <string name="scp_classification_image_description">SCP classification image</string>
     <string name="scp_rating_arrow_description">SCP rating image</string>
+    <string name="edit_button">Edit button</string>
 </resources>
