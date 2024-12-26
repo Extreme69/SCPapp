@@ -1,5 +1,6 @@
 package com.example.scpapp.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -39,14 +40,23 @@ class SCPActivity : AppCompatActivity() {
 
         // Set up the back button
         binding.buttonBack.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed() // This will take the user back to the previous activity
+            onBackPressedDispatcher.onBackPressed() // Navigate back to the previous activity
         }
     }
 
     private fun setupRecyclerView() {
         binding.recyclerViewSCPs.apply {
             layoutManager = LinearLayoutManager(this@SCPActivity)
-            adapter = SCPAdapter()
+            adapter = SCPAdapter { selectedSCP ->
+                navigateToDetail(selectedSCP.id)
+            }
         }
+    }
+
+    private fun navigateToDetail(scpId: String) {
+        val intent = Intent(this, SCPDetailActivity::class.java).apply {
+            putExtra("scp_id", scpId)
+        }
+        startActivity(intent)
     }
 }

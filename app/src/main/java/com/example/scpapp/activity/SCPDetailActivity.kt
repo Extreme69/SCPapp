@@ -40,9 +40,11 @@ class SCPDetailActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.textViewSCPRating).text = "Rating: ${details.rating}"
                 findViewById<TextView>(R.id.textViewSCPDescription).text = details.description
 
+                /*
                 // Load image using Glide
                 val imageView = findViewById<ImageView>(R.id.imageViewSCP)
                 Glide.with(this).load(details.photoUrl).into(imageView)
+                */
 
                 // Populate SCP Tales
                 val talesLayout = findViewById<LinearLayout>(R.id.linearLayoutSCPTales)

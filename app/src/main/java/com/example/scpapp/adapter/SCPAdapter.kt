@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.scpapp.data.SCP
 import com.example.scpapp.databinding.ItemScpBinding
 
-class SCPAdapter : ListAdapter<SCP, SCPAdapter.SCPViewHolder>(DiffCallback) {
+class SCPAdapter(private val onItemClick: (SCP) -> Unit) :
+    ListAdapter<SCP, SCPAdapter.SCPViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<SCP>() {
         override fun areItemsTheSame(oldItem: SCP, newItem: SCP): Boolean = oldItem.id == newItem.id
@@ -17,14 +18,18 @@ class SCPAdapter : ListAdapter<SCP, SCPAdapter.SCPViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SCPViewHolder {
         val binding = ItemScpBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SCPViewHolder(binding)
+        return SCPViewHolder(binding, onItemClick)
     }
 
     override fun onBindViewHolder(holder: SCPViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class SCPViewHolder(private val binding: ItemScpBinding) : RecyclerView.ViewHolder(binding.root) {
+    class SCPViewHolder(
+        private val binding: ItemScpBinding,
+        private val onItemClick: (SCP) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(scp: SCP) {
             // Bind the SCP ID and Title (e.g., "SCP-173: The Statue")
             binding.textViewSCPTitle.text = "${scp.id}: ${scp.title}"
@@ -34,6 +39,11 @@ class SCPAdapter : ListAdapter<SCP, SCPAdapter.SCPViewHolder>(DiffCallback) {
 
             // Bind the SCP Rating (e.g., "93")
             binding.textViewSCPRating.text = scp.rating.toString()
+
+            // Set click listener
+            binding.root.setOnClickListener {
+                onItemClick(scp)
+            }
         }
     }
 }
