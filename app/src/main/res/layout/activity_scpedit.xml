@@ -42,12 +42,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:contentDescription="@string/back_button" />
 
-        <!-- Title Text "Add SCP" -->
+        <!-- Title Text "Edit SCP" -->
         <TextView
             android:id="@+id/topBarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_scp_text"
+            android:text="@string/edit_scp_text"
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
@@ -86,27 +86,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="8dp" />
 
-    <!-- Form fields for SCP ID, Title, and Classification -->
-
-    <!-- SCP ID -->
-    <EditText
-        android:id="@+id/scpIdEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/scp_id_text"
-        android:textColor="@color/white"
-        android:inputType="text"
-        android:importantForAccessibility="yes"
-        android:textSize="24sp"
-        android:padding="8dp"
-        android:background="@color/light_gray"
-        android:contentDescription="@string/scp_id_edit_text"
-        android:autofillHints="name"
-        app:layout_constraintTop_toTopOf="@id/scpPhotoPlaceholder"
-        app:layout_constraintStart_toEndOf="@id/scpPhotoPlaceholder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.4"
-        android:layout_marginTop="4dp" />
+    <!-- Form fields for, Title, and Classification -->
 
     <!-- Title -->
     <EditText
@@ -123,7 +103,7 @@
         android:background="@color/light_gray"
         android:contentDescription="@string/scp_title_edit_text"
         android:autofillHints="name"
-        app:layout_constraintTop_toBottomOf="@id/scpIdEditText"
+        app:layout_constraintTop_toBottomOf="@id/scpPhotoPlaceholder"
         app:layout_constraintStart_toEndOf="@id/scpPhotoPlaceholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.4"

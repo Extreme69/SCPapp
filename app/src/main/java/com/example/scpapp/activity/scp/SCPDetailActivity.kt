@@ -1,4 +1,4 @@
-package com.example.scpapp.activity
+package com.example.scpapp.activity.scp
 
 import android.content.Intent
 import android.net.Uri
@@ -23,16 +23,24 @@ class SCPDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scpdetail)
 
-        // Set up the back button
-        findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
-
         // Retrieve scp_id from intent
         val scpId = intent.getStringExtra("scp_id") ?: run {
             Toast.makeText(this, "SCP ID not provided!", Toast.LENGTH_SHORT).show()
             finish()
             return
+        }
+
+        // Set up the back button
+        findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        // Set up the edit button
+        findViewById<ImageButton>(R.id.button_scp).setOnClickListener {
+            val intent = Intent(this, SCPEditActivity::class.java).apply {
+                putExtra("scp_id", scpId) // Pass SCP ID to the edit activity
+            }
+            startActivity(intent)
         }
 
         // Initialize ViewModel

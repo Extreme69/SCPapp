@@ -12,6 +12,7 @@
     <string name="add_button">Add button</string>
     <string name="save_button">Save button</string>
     <string name="add_scp_text">Add SCP</string>
+    <string name="edit_scp_text">Edit SCP</string>
     <string name="scp_id_text">SCP-</string>
     <string name="scp_title_text">Title</string>
     <string name="scp_id_edit_text">Id edit text</string>

@@ -1,6 +1,7 @@
-package com.example.scpapp.activity
+package com.example.scpapp.activity.scp
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -52,20 +53,21 @@ class SCPAdd : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        // Observe classification types
-        viewModel.classificationTypes.observe(this) { _ ->
-            val adapter = viewModel.getClassificationAdapter(this)
+        viewModel.classificationTypes.observe(this) { classifications ->
+            val adapter = ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                classifications
+            ).apply {
+                setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            }
             binding.classificationSpinner.adapter = adapter
         }
 
-        // Observe validation errors
         viewModel.validationError.observe(this) { errorMessage ->
-            errorMessage?.let {
-                showErrorDialog(it)
-            }
+            errorMessage?.let { showErrorDialog(it) }
         }
 
-        // Observe save result
         viewModel.saveSCPResult.observe(this) { result ->
             result.onSuccess {
                 showSuccessDialog()

@@ -16,10 +16,13 @@
         android:theme="@style/Theme.SCPApp"
         tools:targetApi="31">
         <activity
-            android:name=".activity.SCPAdd"
+            android:name=".activity.scp.SCPEditActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SCPDetailActivity"
+            android:name=".activity.scp.SCPAdd"
+            android:exported="false" />
+        <activity
+            android:name=".activity.scp.SCPDetailActivity"
             android:exported="false" />
         <activity
             android:name=".activity.SettingsActivity"
@@ -28,7 +31,7 @@
             android:name=".activity.TalesActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SCPActivity"
+            android:name=".activity.scp.SCPActivity"
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"

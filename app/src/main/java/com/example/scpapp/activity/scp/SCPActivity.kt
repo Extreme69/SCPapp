@@ -1,4 +1,4 @@
-package com.example.scpapp.activity
+package com.example.scpapp.activity.scp
 
 import android.content.Intent
 import android.os.Bundle
