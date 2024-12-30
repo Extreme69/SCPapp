@@ -56,7 +56,7 @@ class SCPDetailActivity : AppCompatActivity() {
                     "neutralized" -> R.drawable.ic_scp_neutralized
                     "pending" -> R.drawable.ic_scp_pending
                     "thaumiel" -> R.drawable.ic_scp_thaumiel
-                    "ticonderogal" -> R.drawable.ic_scp_ticonderogal
+                    "ticonderoga" -> R.drawable.ic_scp_ticonderoga
                     "archon" -> R.drawable.ic_scp_archon
                     else -> Log.d("SCPDetailActivity", "No image for this classification: ${details.classification}")
                 }

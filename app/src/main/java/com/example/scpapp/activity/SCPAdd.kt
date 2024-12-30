@@ -20,23 +20,58 @@ class SCPAdd : AppCompatActivity() {
         binding = ActivityScpaddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set up the back button in the UI
+        setupUI()
+        observeViewModel()
+    }
+
+    private fun setupUI() {
+        // Back button click listener
         binding.buttonBack.setOnClickListener {
             showUnsavedChangesDialog()
         }
 
-        // Handle system back button with OnBackPressedDispatcher
+        // Handle system back button
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 showUnsavedChangesDialog()
             }
         })
 
-        // Observe the classification types LiveData
+        // Save button click listener
+        binding.buttonSave.setOnClickListener {
+            val id = binding.scpIdEditText.text.toString()
+            val title = binding.scpTitleEditText.text.toString()
+            val classification = binding.classificationSpinner.selectedItem.toString()
+            val url = binding.urlEditText.text.toString()
+            val description = binding.scpDescriptionEditText.text.toString()
+
+            if (viewModel.validateInputs(id, title, classification, url, description)) {
+                viewModel.saveSCP(id, title, classification, url, description)
+            }
+        }
+    }
+
+    private fun observeViewModel() {
+        // Observe classification types
         viewModel.classificationTypes.observe(this) { _ ->
-            // Get the adapter from ViewModel and set it to the spinner
             val adapter = viewModel.getClassificationAdapter(this)
             binding.classificationSpinner.adapter = adapter
+        }
+
+        // Observe validation errors
+        viewModel.validationError.observe(this) { errorMessage ->
+            errorMessage?.let {
+                showErrorDialog(it)
+            }
+        }
+
+        // Observe save result
+        viewModel.saveSCPResult.observe(this) { result ->
+            result.onSuccess {
+                showSuccessDialog()
+            }.onFailure { error ->
+                showErrorDialog(error.localizedMessage ?: "An unknown error occurred")
+            }
         }
     }
 
@@ -45,9 +80,27 @@ class SCPAdd : AppCompatActivity() {
             .setTitle("Unsaved Changes")
             .setMessage("Do you want to discard the changes?")
             .setPositiveButton("Discard") { _, _ ->
-                finish() // Closes the activity and navigates back
+                finish()
             }
-            .setNegativeButton("Cancel", null) // Dismiss the dialog
+            .setNegativeButton("Cancel", null)
+            .create()
+            .show()
+    }
+
+    private fun showSuccessDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Success")
+            .setMessage("SCP created successfully.")
+            .setPositiveButton("OK") { _, _ -> finish() }
+            .create()
+            .show()
+    }
+
+    private fun showErrorDialog(message: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Error")
+            .setMessage(message)
+            .setPositiveButton("OK", null)
             .create()
             .show()
     }

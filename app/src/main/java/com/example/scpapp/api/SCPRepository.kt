@@ -2,6 +2,8 @@ package com.example.scpapp.api
 
 import android.util.Log
 import com.example.scpapp.data.SCP
+import com.example.scpapp.data.SCPRequest
+import retrofit2.Response
 
 class SCPRepository {
     private val api = RetrofitClient.api
@@ -37,6 +39,22 @@ class SCPRepository {
         } catch (e: Exception) {
             Log.e("SCPRepository", "Error fetching SCP details for ID: $scpId", e)
             null
+        }
+    }
+
+    // Add createSCP function
+    suspend fun createSCP(scpRequest: SCPRequest): Response<Unit> {
+        return try {
+            val response = api.createSCP(scpRequest)
+            if (response.isSuccessful) {
+                Log.d("SCPRepository", "Successfully created SCP: ${scpRequest.scp_id}")
+            } else {
+                Log.e("SCPRepository", "Failed to create SCP: ${response.code()}")
+            }
+            response
+        } catch (e: Exception) {
+            Log.e("SCPRepository", "Error creating SCP", e)
+            throw e
         }
     }
 }
