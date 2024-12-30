@@ -9,4 +9,14 @@
     <string name="scp_classification_image_description">SCP classification image</string>
     <string name="scp_rating_arrow_description">SCP rating image</string>
     <string name="edit_button">Edit button</string>
+    <string name="add_button">Add button</string>
+    <string name="save_button">Save button</string>
+    <string name="add_scp_text">Add SCP</string>
+    <string name="scp_id_text">SCP-</string>
+    <string name="scp_title_text">Title</string>
+    <string name="scp_id_edit_text">Id edit text</string>
+    <string name="scp_title_edit_text">Title edit text</string>
+    <string name="classification_spinner">Classification spinner</string>
+    <string name="url_field">URL edit text</string>
+    <string name="scp_description_edit_text">SCP description edit text</string>
 </resources>

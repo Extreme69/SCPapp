@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/light_gray" /> <!-- Set your desired color -->
+    <corners android:radius="50dp" /> <!-- Makes the button circular -->
+    <padding android:top="16dp" android:bottom="16dp" android:left="16dp" android:right="16dp" />
+    <size android:width="100dp" android:height="100dp" />
+</shape>

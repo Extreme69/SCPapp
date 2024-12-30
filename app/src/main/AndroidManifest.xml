@@ -16,6 +16,9 @@
         android:theme="@style/Theme.SCPApp"
         tools:targetApi="31">
         <activity
+            android:name=".activity.SCPAdd"
+            android:exported="false" />
+        <activity
             android:name=".activity.SCPDetailActivity"
             android:exported="false" />
         <activity

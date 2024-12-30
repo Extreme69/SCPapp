@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "http://192.168.1.41:3000/"
+    private const val BASE_URL = "http://192.168.0.143:3000/"
 
     // Create a logging interceptor to capture HTTP requests and responses
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
