@@ -3,6 +3,7 @@ package com.example.scpapp.api
 import android.util.Log
 import com.example.scpapp.data.SCP
 import com.example.scpapp.data.SCPRequest
+import com.example.scpapp.data.SCPUpdateRequest
 import retrofit2.Response
 
 class SCPRepository {
@@ -54,6 +55,22 @@ class SCPRepository {
             response
         } catch (e: Exception) {
             Log.e("SCPRepository", "Error creating SCP", e)
+            throw e
+        }
+    }
+
+    // Function for updating the SCP
+    suspend fun updateSCP(id: String, updatedFields: SCPUpdateRequest): Response<Unit> {
+        return try {
+            val response = api.updateSCP(id, updatedFields)
+            if (response.isSuccessful) {
+                Log.d("SCPRepository", "Successfully updated SCP: $id")
+            } else {
+                Log.e("SCPRepository", "Failed to update SCP: ${response.code()}")
+            }
+            response
+        } catch (e: Exception) {
+            Log.e("SCPRepository", "Error updating SCP", e)
             throw e
         }
     }

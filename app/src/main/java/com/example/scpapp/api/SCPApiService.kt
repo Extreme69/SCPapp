@@ -2,10 +2,13 @@ package com.example.scpapp.api
 
 import com.example.scpapp.data.SCPRequest
 import com.example.scpapp.data.SCPResponse
+import com.example.scpapp.data.SCPUpdateRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface SCPApiService {
@@ -17,4 +20,10 @@ interface SCPApiService {
 
     @POST("SCPs")
     suspend fun createSCP(@Body scp: SCPRequest): Response<Unit>
+
+    @PUT("SCPs/{id}")
+    suspend fun updateSCP(
+        @Path("id") scpId: String,
+        @Body updatedFields: SCPUpdateRequest
+    ): Response<Unit>
 }
