@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageButton
 import com.example.scpapp.R
 import com.example.scpapp.activity.scp.SCPActivity
+import com.example.scpapp.activity.tale.TalesActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

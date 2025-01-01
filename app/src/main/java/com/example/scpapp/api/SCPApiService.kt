@@ -3,6 +3,7 @@ package com.example.scpapp.api
 import com.example.scpapp.data.SCPRequest
 import com.example.scpapp.data.SCPResponse
 import com.example.scpapp.data.SCPUpdateRequest
+import com.example.scpapp.data.TaleResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -33,4 +34,10 @@ interface SCPApiService {
 
     @DELETE("SCPs/{id}")
     suspend fun deleteSCP(@Path("id") scpId: String): Response<Unit>
+
+    @GET("SCPTales")
+    suspend fun getTales(): Response<TaleResponse>
+
+    @GET("SCPTales")
+    suspend fun searchTales(@Query("search") search: String): Response<TaleResponse>
 }

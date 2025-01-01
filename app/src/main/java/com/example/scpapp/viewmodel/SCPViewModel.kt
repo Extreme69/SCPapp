@@ -8,7 +8,6 @@ import com.example.scpapp.api.SCPRepository
 import com.example.scpapp.data.SCP
 import kotlinx.coroutines.launch
 
-// ViewModel for SCPs
 class SCPViewModel(private val repository: SCPRepository = SCPRepository()) : ViewModel() {
 
     // LiveData for holding all SCPs

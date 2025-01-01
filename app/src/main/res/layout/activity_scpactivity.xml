@@ -47,7 +47,7 @@
             android:id="@+id/searchBar"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:hint="@string/search_hint"
+            android:hint="@string/search_hint_scp"
             android:background="@drawable/search_bar_background"
             android:padding="8dp"
             android:layout_marginTop="8dp"

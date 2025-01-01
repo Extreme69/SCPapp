@@ -4,7 +4,8 @@
     <string name="tales_button">Tales</string>
     <string name="settings_button">Settings</string>
     <string name="back_button">Back</string>
-    <string name="search_hint">Search SCPs</string>
+    <string name="search_hint_scp">Search SCPs</string>
+    <string name="search_hint_tale">Search Tales</string>
     <string name="scp_image_description">SCP image</string>
     <string name="scp_classification_image_description">SCP classification image</string>
     <string name="scp_rating_arrow_description">SCP rating image</string>
