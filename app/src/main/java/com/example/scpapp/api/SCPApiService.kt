@@ -5,6 +5,7 @@ import com.example.scpapp.data.SCPResponse
 import com.example.scpapp.data.SCPUpdateRequest
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -26,4 +27,7 @@ interface SCPApiService {
         @Path("id") scpId: String,
         @Body updatedFields: SCPUpdateRequest
     ): Response<Unit>
+
+    @DELETE("SCPs/{id}")
+    suspend fun deleteSCP(@Path("id") scpId: String): Response<Unit>
 }

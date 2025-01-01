@@ -1,23 +1,24 @@
 <resources>
     <string name="app_name">SCP app</string>
-    <string name="scp_button">SCPs Button</string>
-    <string name="tales_button">Tales Button</string>
-    <string name="settings_button">Settings Button</string>
-    <string name="back_button">Back Button</string>
+    <string name="scp_button">SCPs</string>
+    <string name="tales_button">Tales</string>
+    <string name="settings_button">Settings</string>
+    <string name="back_button">Back</string>
     <string name="search_hint">Search SCPs</string>
     <string name="scp_image_description">SCP image</string>
     <string name="scp_classification_image_description">SCP classification image</string>
     <string name="scp_rating_arrow_description">SCP rating image</string>
-    <string name="edit_button">Edit button</string>
-    <string name="add_button">Add button</string>
-    <string name="save_button">Save button</string>
+    <string name="edit_button">Edit</string>
+    <string name="add_button">Add</string>
+    <string name="save_button">Save</string>
     <string name="add_scp_text">Add SCP</string>
     <string name="edit_scp_text">Edit SCP</string>
     <string name="scp_id_text">SCP-</string>
     <string name="scp_title_text">Title</string>
-    <string name="scp_id_edit_text">Id edit text</string>
-    <string name="scp_title_edit_text">Title edit text</string>
-    <string name="classification_spinner">Classification spinner</string>
-    <string name="url_field">URL edit text</string>
-    <string name="scp_description_edit_text">SCP description edit text</string>
+    <string name="scp_id_edit_text">Id edit</string>
+    <string name="scp_title_edit_text">Title edit</string>
+    <string name="classification_spinner">Classification</string>
+    <string name="url_field">URL edit</string>
+    <string name="scp_description_edit_text">SCP description edit</string>
+    <string name="delete_button">Delete</string>
 </resources>

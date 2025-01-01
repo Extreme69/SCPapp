@@ -18,9 +18,11 @@ class SCPEditViewModel(private val repository: SCPRepository = SCPRepository()) 
     private val _validationError = MutableLiveData<String?>()
     val validationError: LiveData<String?> = _validationError
 
-    // This will hold the result of the save operation
     private val _saveSCPResult = MutableLiveData<Result<Unit>>()
     val saveSCPResult: LiveData<Result<Unit>> = _saveSCPResult
+
+    private val _deleteSCPResult = MutableLiveData<Result<Unit>>()
+    val deleteSCPResult: LiveData<Result<Unit>> = _deleteSCPResult
 
     init {
         loadClassificationTypes()
@@ -73,6 +75,21 @@ class SCPEditViewModel(private val repository: SCPRepository = SCPRepository()) 
                 }
             } catch (e: Exception) {
                 _saveSCPResult.postValue(Result.failure(e))
+            }
+        }
+    }
+
+    fun deleteSCP(scpId: String) {
+        viewModelScope.launch {
+            try {
+                val response = repository.deleteSCP(scpId)
+                if (response.isSuccessful) {
+                    _deleteSCPResult.postValue(Result.success(Unit))
+                } else {
+                    _deleteSCPResult.postValue(Result.failure(Exception("Failed to delete SCP: ${response.code()}")))
+                }
+            } catch (e: Exception) {
+                _deleteSCPResult.postValue(Result.failure(e))
             }
         }
     }

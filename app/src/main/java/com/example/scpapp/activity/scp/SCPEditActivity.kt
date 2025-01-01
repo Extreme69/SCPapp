@@ -49,7 +49,24 @@ class SCPEditActivity : AppCompatActivity() {
             }
         })
 
-// Save button click listener
+        // Delete button click listener
+        binding.buttonDelete.setOnClickListener {
+            if (!scpId.isNullOrEmpty()) {
+                AlertDialog.Builder(this)
+                    .setTitle("Delete SCP")
+                    .setMessage("Are you sure you want to delete this SCP?")
+                    .setPositiveButton("Yes") { _, _ ->
+                        viewModel.deleteSCP(scpId)
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .create()
+                    .show()
+            } else {
+                Toast.makeText(this, "SCP ID is missing", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Save button click listener
         binding.buttonSave.setOnClickListener {
             val title = binding.scpTitleEditText.text.toString()
             val classification = binding.classificationSpinner.selectedItem.toString()
@@ -111,7 +128,16 @@ class SCPEditActivity : AppCompatActivity() {
         // Observe save result
         viewModel.saveSCPResult.observe(this) { result ->
             result.onSuccess {
-                showSuccessDialog()
+                showSuccessDialogSave()
+            }.onFailure { error ->
+                showErrorDialog(error.localizedMessage ?: "An unknown error occurred")
+            }
+        }
+
+        // Observe delete result
+        viewModel.deleteSCPResult.observe(this) { result ->
+            result.onSuccess {
+                showSuccessDialogDelete()
             }.onFailure { error ->
                 showErrorDialog(error.localizedMessage ?: "An unknown error occurred")
             }
@@ -148,10 +174,19 @@ class SCPEditActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun showSuccessDialog() {
+    private fun showSuccessDialogSave() {
         AlertDialog.Builder(this)
             .setTitle("Success")
             .setMessage("SCP updated successfully.")
+            .setPositiveButton("OK") { _, _ -> finish() }
+            .create()
+            .show()
+    }
+
+    private fun showSuccessDialogDelete() {
+        AlertDialog.Builder(this)
+            .setTitle("Success")
+            .setMessage("SCP deleted successfully.")
             .setPositiveButton("OK") { _, _ -> finish() }
             .create()
             .show()

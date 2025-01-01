@@ -74,4 +74,19 @@ class SCPRepository {
             throw e
         }
     }
+
+    suspend fun deleteSCP(scpId: String): Response<Unit> {
+        return try {
+            val response = api.deleteSCP(scpId)
+            if (response.isSuccessful) {
+                Log.d("SCPRepository", "Successfully deleted SCP: $scpId")
+            } else {
+                Log.e("SCPRepository", "Failed to delete SCP: ${response.code()}")
+            }
+            response
+        } catch (e: Exception) {
+            Log.e("SCPRepository", "Error deleting SCP", e)
+            throw e
+        }
+    }
 }
