@@ -19,6 +19,9 @@ interface SCPApiService {
     @GET("SCPs")
     suspend fun getSCPDetails(@Query("scp_id") scpId: String): Response<SCPResponse>
 
+    @GET("SCPs")
+    suspend fun searchSCPs(@Query("search") search: String): Response<SCPResponse>
+
     @POST("SCPs")
     suspend fun createSCP(@Body scp: SCPRequest): Response<Unit>
 

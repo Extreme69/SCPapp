@@ -14,7 +14,7 @@ class SCPRepository {
             val response = api.getSCPs()
             if (response.isSuccessful) {
                 Log.d("SCPRepository", "Response is successful.")
-                val originalData = response.body()?.data?.data // Access nested 'data'
+                val originalData = response.body()?.data?.data
                 originalData
             } else {
                 Log.e("SCPRepository", "Response not successful.")
@@ -32,7 +32,7 @@ class SCPRepository {
             val response = api.getSCPDetails(scpId)
             if (response.isSuccessful) {
                 Log.d("SCPRepository", "Successfully fetched SCP details for ID: $scpId")
-                response.body()?.data?.data?.firstOrNull() // Adjust based on your response structure
+                response.body()?.data?.data?.firstOrNull()
             } else {
                 Log.e("SCPRepository", "Failed to fetch SCP details for ID: $scpId")
                 null
@@ -43,7 +43,6 @@ class SCPRepository {
         }
     }
 
-    // Add createSCP function
     suspend fun createSCP(scpRequest: SCPRequest): Response<Unit> {
         return try {
             val response = api.createSCP(scpRequest)
@@ -59,7 +58,6 @@ class SCPRepository {
         }
     }
 
-    // Function for updating the SCP
     suspend fun updateSCP(id: String, updatedFields: SCPUpdateRequest): Response<Unit> {
         return try {
             val response = api.updateSCP(id, updatedFields)
@@ -87,6 +85,24 @@ class SCPRepository {
         } catch (e: Exception) {
             Log.e("SCPRepository", "Error deleting SCP", e)
             throw e
+        }
+    }
+
+    suspend fun searchSCPs(query: String): List<SCP>? {
+        return try {
+            val response = api.searchSCPs(query)
+            if (response.isSuccessful) {
+                Log.d("SCPRepository", "Search successful for query: $query")
+                val originalData = response.body()?.data?.data
+                originalData
+            } else {
+                Log.e("SCPRepository", "Search failed for query: $query")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("SCPRepository", "Error making search API request", e)
+            e.printStackTrace()
+            null
         }
     }
 }
