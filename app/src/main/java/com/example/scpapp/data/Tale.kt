@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class Tale(
     @SerializedName("tale_id") val id: String,
     @SerializedName("title") val title: String,
-    @SerializedName("content") val description: String,
+    @SerializedName("content") val content: String,
     @SerializedName("rating") val rating: Int,
     @SerializedName("scp_id") val scpId: List<String>,
     @SerializedName("url") val url: String,

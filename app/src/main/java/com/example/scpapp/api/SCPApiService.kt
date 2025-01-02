@@ -40,4 +40,7 @@ interface SCPApiService {
 
     @GET("SCPTales")
     suspend fun searchTales(@Query("search") search: String): Response<TaleResponse>
+
+    @GET("SCPTales")
+    suspend fun getTaleDetails(@Query("tale_id") taleId: String): Response<TaleResponse>
 }

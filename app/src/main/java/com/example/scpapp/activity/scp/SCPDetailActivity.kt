@@ -108,7 +108,7 @@ class SCPDetailActivity : AppCompatActivity() {
                 val wikiLinkTextView = findViewById<TextView>(R.id.textViewSCPWikiLink)
                 wikiLinkTextView.text = "Go to SCP Wiki"
                 wikiLinkTextView.setOnClickListener {
-                    val url = details.url // Assuming details.url contains the API-provided URL
+                    val url = details.url
                     val intent = Intent(Intent.ACTION_VIEW).apply {
                         data = Uri.parse(url)
                     }

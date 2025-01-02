@@ -1,6 +1,7 @@
 package com.example.scpapp.api
 
 import android.util.Log
+import com.example.scpapp.data.SCP
 import com.example.scpapp.data.Tale
 
 class TalesRepository {
@@ -38,6 +39,22 @@ class TalesRepository {
         } catch (e: Exception) {
             Log.e("TalesRepository", "Error making search API request", e)
             e.printStackTrace()
+            null
+        }
+    }
+
+    suspend fun getTaleDetails(taleId: String): Tale? {
+        return try {
+            val response = api.getTaleDetails(taleId)
+            if (response.isSuccessful) {
+                Log.d("TalesRepository", "Successfully fetched tale details for ID: $taleId")
+                response.body()?.data?.firstOrNull()
+            } else {
+                Log.e("TalesRepository", "Failed to fetch tale details for ID: $taleId")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("TalesRepository", "Error fetching tale details for ID: $taleId", e)
             null
         }
     }

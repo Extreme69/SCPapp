@@ -8,7 +8,7 @@
     <string name="search_hint_tale">Search Tales</string>
     <string name="scp_image_description">SCP image</string>
     <string name="scp_classification_image_description">SCP classification image</string>
-    <string name="scp_rating_arrow_description">SCP rating image</string>
+    <string name="rating_arrow_description">Rating image</string>
     <string name="edit_button">Edit</string>
     <string name="add_button">Add</string>
     <string name="save_button">Save</string>
