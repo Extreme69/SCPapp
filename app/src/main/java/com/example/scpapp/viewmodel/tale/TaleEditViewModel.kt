@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.scpapp.api.TalesRepository
-import com.example.scpapp.data.scp.SCPUpdateRequest
 import com.example.scpapp.data.scp.TaleUpdateRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -60,6 +59,21 @@ class TaleEditViewModel(private val repository: TalesRepository = TalesRepositor
                 }
             } catch (e: Exception) {
                 _saveTaleResult.postValue(Result.failure(e))
+            }
+        }
+    }
+
+    fun deleteTale(taleId: String) {
+        viewModelScope.launch {
+            try {
+                val response = repository.deleteTale(taleId)
+                if (response.isSuccessful) {
+                    _deleteTaleResult.postValue(Result.success(Unit))
+                } else {
+                    _deleteTaleResult.postValue(Result.failure(Exception("Failed to delete tale: ${response.code()}")))
+                }
+            } catch (e: Exception) {
+                _deleteTaleResult.postValue(Result.failure(e))
             }
         }
     }

@@ -59,10 +59,14 @@ interface SCPApiService {
     @POST("SCPTales")
     suspend fun createTale(@Body tale: TaleRequest): Response<Unit>
 
-    // Update a tlae
+    // Update a tale
     @PUT("SCPTales/{id}")
     suspend fun updateTale(
         @Path("id") scpId: String,
         @Body updatedFields: TaleUpdateRequest
     ): Response<Unit>
+
+    // Delete a tale
+    @DELETE("SCPTales/{id}")
+    suspend fun deleteTale(@Path("id") taleId: String): Response<Unit>
 }

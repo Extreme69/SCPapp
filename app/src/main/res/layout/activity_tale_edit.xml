@@ -47,12 +47,27 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="8dp" />
 
+        <!-- Delete Button -->
+        <ImageButton
+            android:id="@+id/buttonDelete"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/circular_button_background_white"
+            android:src="@drawable/ic_delete"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toStartOf="@id/buttonSave"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/delete_button" />
+
         <!-- Save Button aligned to the right -->
         <ImageButton
             android:id="@+id/buttonSave"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/circular_button_background"
+            android:background="@drawable/circular_button_background_white"
             android:src="@drawable/ic_save"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"

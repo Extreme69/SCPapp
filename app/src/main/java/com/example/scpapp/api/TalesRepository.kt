@@ -91,4 +91,19 @@ class TalesRepository {
             throw e
         }
     }
+
+    suspend fun deleteTale(taleId: String): Response<Unit> {
+        return try {
+            val response = api.deleteTale(taleId)
+            if (response.isSuccessful) {
+                Log.d("TalesRepository", "Successfully deleted tale: $taleId")
+            } else {
+                Log.e("TalesRepository", "Failed to delete tale: ${response.code()}")
+            }
+            response
+        } catch (e: Exception) {
+            Log.e("TalesRepository", "Error deleting tale", e)
+            throw e
+        }
+    }
 }

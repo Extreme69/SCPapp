@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.scpapp.data.scp.TaleUpdateRequest
@@ -87,6 +88,15 @@ class TaleEditActivity : AppCompatActivity() {
                 binding.addSCPEditText.text?.clear()
             }
             true
+        }
+
+        // Delete button click listener
+        binding.buttonDelete.setOnClickListener {
+            if (!taleId.isNullOrEmpty()) {
+                showDeleteDialog(taleId)
+            } else {
+                Toast.makeText(this, "Tale ID is missing", Toast.LENGTH_SHORT).show()
+            }
         }
 
         observeViewModel()
@@ -197,6 +207,20 @@ class TaleEditActivity : AppCompatActivity() {
             .setTitle("Error")
             .setMessage(message)
             .setPositiveButton("OK", null)
+            .create()
+
+        dialog.setButtonColors()
+        dialog.show()
+    }
+
+    private fun showDeleteDialog(taleId: String) {
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle("Delete tale")
+            .setMessage("Are you sure you want to delete this tale?")
+            .setPositiveButton("Yes") { _, _ ->
+                viewModel.deleteTale(taleId)
+            }
+            .setNegativeButton("Cancel", null)
             .create()
 
         dialog.setButtonColors()
