@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.scpapp.R
-import com.example.scpapp.viewmodel.SCPDetailViewModel
+import com.example.scpapp.viewmodel.scp.SCPDetailViewModel
 
 class SCPDetailActivity : AppCompatActivity() {
 

@@ -3,6 +3,7 @@ package com.example.scpapp.api
 import com.example.scpapp.data.scp.SCPRequest
 import com.example.scpapp.data.scp.SCPResponse
 import com.example.scpapp.data.scp.SCPUpdateRequest
+import com.example.scpapp.data.scp.TaleUpdateRequest
 import com.example.scpapp.data.tale.TaleRequest
 import com.example.scpapp.data.tale.TaleResponse
 import retrofit2.Response
@@ -57,4 +58,11 @@ interface SCPApiService {
     // Create a tale
     @POST("SCPTales")
     suspend fun createTale(@Body tale: TaleRequest): Response<Unit>
+
+    // Update a tlae
+    @PUT("SCPTales/{id}")
+    suspend fun updateTale(
+        @Path("id") scpId: String,
+        @Body updatedFields: TaleUpdateRequest
+    ): Response<Unit>
 }

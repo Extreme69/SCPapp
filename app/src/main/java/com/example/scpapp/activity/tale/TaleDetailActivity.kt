@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.scpapp.R
-import com.example.scpapp.viewmodel.TaleDetailViewModel
+import com.example.scpapp.viewmodel.tale.TaleDetailViewModel
 
 class TaleDetailActivity : AppCompatActivity() {
 
@@ -32,6 +32,14 @@ class TaleDetailActivity : AppCompatActivity() {
         // Set up the back button
         findViewById<ImageButton>(R.id.buttonBack).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        // Set up the edit button
+        findViewById<ImageButton>(R.id.button_scp).setOnClickListener {
+            val intent = Intent(this, TaleEditActivity::class.java).apply {
+                putExtra("tale_id", taleId) // Pass tale ID to the edit activity
+            }
+            startActivity(intent)
         }
 
         // Initialize ViewModel

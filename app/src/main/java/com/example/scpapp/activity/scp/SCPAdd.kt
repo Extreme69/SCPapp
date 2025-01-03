@@ -5,11 +5,10 @@ import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.scpapp.databinding.ActivityScpaddBinding
 import com.example.scpapp.utils.setButtonColors
-import com.example.scpapp.viewmodel.SCPAddViewModel
+import com.example.scpapp.viewmodel.scp.SCPAddViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SCPAdd : AppCompatActivity() {

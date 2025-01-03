@@ -13,7 +13,7 @@ import com.example.scpapp.data.scp.SCP
 import com.example.scpapp.data.scp.SCPUpdateRequest
 import com.example.scpapp.databinding.ActivityScpeditBinding
 import com.example.scpapp.utils.setButtonColors
-import com.example.scpapp.viewmodel.SCPEditViewModel
+import com.example.scpapp.viewmodel.scp.SCPEditViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SCPEditActivity : AppCompatActivity() {

@@ -10,7 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.scpapp.adapter.SCPAdapter
-import com.example.scpapp.viewmodel.SCPViewModel
+import com.example.scpapp.viewmodel.scp.SCPViewModel
 import com.example.scpapp.databinding.ActivityScpactivityBinding
 import android.text.Editable
 import android.text.TextWatcher

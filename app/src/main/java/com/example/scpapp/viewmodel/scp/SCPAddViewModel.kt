@@ -1,4 +1,4 @@
-package com.example.scpapp.viewmodel
+package com.example.scpapp.viewmodel.scp
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

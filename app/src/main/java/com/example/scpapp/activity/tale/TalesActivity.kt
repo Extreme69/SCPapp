@@ -11,10 +11,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.scpapp.activity.scp.SCPAdd
 import com.example.scpapp.adapter.TaleAdapter
 import com.example.scpapp.databinding.ActivityTalesBinding
-import com.example.scpapp.viewmodel.TalesViewModel
+import com.example.scpapp.viewmodel.tale.TalesViewModel
 
 class TalesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTalesBinding

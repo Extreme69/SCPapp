@@ -15,6 +15,7 @@
     <string name="add_scp_text">Add SCP</string>
     <string name="add_tale_text">Add a tale</string>
     <string name="edit_scp_text">Edit SCP</string>
+    <string name="edit_tale_text">Edit tale</string>
     <string name="scp_id_text">SCP-</string>
     <string name="title_text">Title</string>
     <string name="scp_url_field">Enter SCP URL</string>

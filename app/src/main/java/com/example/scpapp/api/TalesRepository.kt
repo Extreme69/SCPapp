@@ -1,6 +1,8 @@
 package com.example.scpapp.api
 
 import android.util.Log
+import com.example.scpapp.data.scp.SCPUpdateRequest
+import com.example.scpapp.data.scp.TaleUpdateRequest
 import com.example.scpapp.data.tale.Tale
 import com.example.scpapp.data.tale.TaleRequest
 import retrofit2.Response
@@ -71,6 +73,21 @@ class TalesRepository {
             response
         } catch (e: Exception) {
             Log.e("TalesRepository", "Error creating tale", e)
+            throw e
+        }
+    }
+
+    suspend fun updateTale(id: String, updatedFields: TaleUpdateRequest): Response<Unit> {
+        return try {
+            val response = api.updateTale(id, updatedFields)
+            if (response.isSuccessful) {
+                Log.d("TalesRepository", "Successfully updated tale: $id")
+            } else {
+                Log.e("TalesRepository", "Failed to update tale: ${response.code()}")
+            }
+            response
+        } catch (e: Exception) {
+            Log.e("TalesRepository", "Error updating tale", e)
             throw e
         }
     }

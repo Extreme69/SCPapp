@@ -1,15 +1,13 @@
 package com.example.scpapp.activity.tale
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.scpapp.databinding.ActivityTaleAddBinding
 import com.example.scpapp.utils.setButtonColors
-import com.example.scpapp.viewmodel.TaleAddViewModel
+import com.example.scpapp.viewmodel.tale.TaleAddViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 

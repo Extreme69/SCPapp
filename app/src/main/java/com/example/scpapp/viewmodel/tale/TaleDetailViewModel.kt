@@ -1,4 +1,4 @@
-package com.example.scpapp.viewmodel
+package com.example.scpapp.viewmodel.tale
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
