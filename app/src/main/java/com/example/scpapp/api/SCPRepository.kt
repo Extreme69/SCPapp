@@ -1,9 +1,9 @@
 package com.example.scpapp.api
 
 import android.util.Log
-import com.example.scpapp.data.SCP
-import com.example.scpapp.data.SCPRequest
-import com.example.scpapp.data.SCPUpdateRequest
+import com.example.scpapp.data.scp.SCP
+import com.example.scpapp.data.scp.SCPRequest
+import com.example.scpapp.data.scp.SCPUpdateRequest
 import retrofit2.Response
 
 class SCPRepository {

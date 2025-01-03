@@ -13,13 +13,18 @@
     <string name="add_button">Add</string>
     <string name="save_button">Save</string>
     <string name="add_scp_text">Add SCP</string>
+    <string name="add_tale_text">Add a tale</string>
     <string name="edit_scp_text">Edit SCP</string>
     <string name="scp_id_text">SCP-</string>
-    <string name="scp_title_text">Title</string>
-    <string name="scp_id_edit_text">Id edit</string>
-    <string name="scp_title_edit_text">Title edit</string>
-    <string name="classification_spinner">Classification</string>
-    <string name="url_field">URL edit</string>
-    <string name="scp_description_edit_text">SCP description edit</string>
+    <string name="title_text">Title</string>
+    <string name="scp_url_field">Enter SCP URL</string>
+    <string name="tale_url_field">Enter Tale URL</string>
     <string name="delete_button">Delete</string>
+    <string name="tale_content_field">Enter Tale content here…</string>
+    <string name="scp_description_field">Enter Scp description here…</string>
+    <string name="scp_wiki_hyperlink_text">Go to SCP Wiki</string>
+    <string name="scp_related_tales_text">Related Tales:</string>
+    <string name="tale_wiki_hyperlink_text">Go to tale Wiki</string>
+    <string name="tale_related_scps_text">Related SCPs:</string>
+    <string name="tale_adding_scps_hint">Type an SCP ID and press Enter:</string>
 </resources>

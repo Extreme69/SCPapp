@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.scpapp.api.TalesRepository
-import com.example.scpapp.data.Tale
+import com.example.scpapp.data.tale.Tale
 import kotlinx.coroutines.launch
 
 class TalesViewModel(private val repository: TalesRepository = TalesRepository()) : ViewModel() {

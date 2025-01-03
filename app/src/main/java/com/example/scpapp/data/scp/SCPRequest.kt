@@ -1,4 +1,4 @@
-package com.example.scpapp.data
+package com.example.scpapp.data.scp
 
 data class SCPRequest(
     val scp_id: String,

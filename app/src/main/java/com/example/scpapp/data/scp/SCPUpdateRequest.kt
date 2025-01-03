@@ -1,4 +1,4 @@
-package com.example.scpapp.data
+package com.example.scpapp.data.scp
 
 data class SCPUpdateRequest(
     val title: String? = null,

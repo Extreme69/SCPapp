@@ -1,12 +1,11 @@
 package com.example.scpapp.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.scpapp.data.Tale
+import com.example.scpapp.data.tale.Tale
 import com.example.scpapp.databinding.ItemTaleBinding
 
 class TaleAdapter(private val onItemClick: (Tale) -> Unit) :

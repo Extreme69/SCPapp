@@ -1,8 +1,9 @@
 package com.example.scpapp.api
 
 import android.util.Log
-import com.example.scpapp.data.SCP
-import com.example.scpapp.data.Tale
+import com.example.scpapp.data.tale.Tale
+import com.example.scpapp.data.tale.TaleRequest
+import retrofit2.Response
 
 class TalesRepository {
     private val api = RetrofitClient.api
@@ -56,6 +57,21 @@ class TalesRepository {
         } catch (e: Exception) {
             Log.e("TalesRepository", "Error fetching tale details for ID: $taleId", e)
             null
+        }
+    }
+
+    suspend fun createTale(taleRequest: TaleRequest): Response<Unit> {
+        return try {
+            val response = api.createTale(taleRequest)
+            if (response.isSuccessful) {
+                Log.d("TalesRepository", "Successfully created tale: ${taleRequest.title}")
+            } else {
+                Log.e("TalesRepository", "Failed to create tale: ${response.code()}")
+            }
+            response
+        } catch (e: Exception) {
+            Log.e("TalesRepository", "Error creating tale", e)
+            throw e
         }
     }
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    tools:context=".activity.scp.SCPAdd">
+    tools:context=".activity.tale.TaleAddActivity">
 
     <!-- Top bar with back button and save button -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,12 +33,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:contentDescription="@string/back_button" />
 
-        <!-- Title Text "Add SCP" -->
+        <!-- Title Text "Add a Tale" -->
         <TextView
             android:id="@+id/topBarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_scp_text"
+            android:text="@string/add_tale_text"
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
@@ -62,45 +62,9 @@
             android:contentDescription="@string/save_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Placeholder Image for SCP photo -->
-    <ImageView
-        android:id="@+id/scpPhotoPlaceholder"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/placeholder_image"
-        android:contentDescription="@string/scp_image_description"
-        app:layout_constraintTop_toBottomOf="@id/topBarContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintDimensionRatio="1:1"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp" />
-
-    <!-- Form fields for SCP ID, Title, and Classification -->
-
-    <!-- SCP ID -->
-    <EditText
-        android:id="@+id/scpIdEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/scp_id_text"
-        android:textColor="@color/white"
-        android:inputType="text"
-        android:importantForAccessibility="yes"
-        android:textSize="24sp"
-        android:padding="8dp"
-        android:background="@color/light_gray"
-        android:autofillHints="name"
-        app:layout_constraintTop_toTopOf="@id/scpPhotoPlaceholder"
-        app:layout_constraintStart_toEndOf="@id/scpPhotoPlaceholder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.4"
-        android:layout_marginTop="4dp" />
-
     <!-- Title -->
     <EditText
-        android:id="@+id/scpTitleEditText"
+        android:id="@+id/taleTitleEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="text"
@@ -112,40 +76,24 @@
         android:padding="8dp"
         android:background="@color/light_gray"
         android:autofillHints="name"
-        app:layout_constraintTop_toBottomOf="@id/scpIdEditText"
-        app:layout_constraintStart_toEndOf="@id/scpPhotoPlaceholder"
+        app:layout_constraintTop_toBottomOf="@id/topBarContainer"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.4"
         android:layout_marginTop="16dp" />
-
-    <!-- Classification Spinner -->
-    <Spinner
-        android:id="@+id/classificationSpinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:importantForAccessibility="yes"
-        android:padding="8dp"
-        android:background="@color/light_gray"
-        app:layout_constraintTop_toBottomOf="@id/scpTitleEditText"
-        app:layout_constraintStart_toEndOf="@id/scpPhotoPlaceholder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.4"
-        android:layout_marginTop="16dp"
-        android:spinnerMode="dropdown"/>
 
     <!-- URL Field -->
     <EditText
         android:id="@+id/urlEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/scp_url_field"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:importantForAccessibility="yes"
         android:textSize="24sp"
         android:padding="8dp"
         android:background="@color/light_gray"
-        app:layout_constraintTop_toBottomOf="@id/scpPhotoPlaceholder"
+        android:hint="@string/tale_url_field"
+        app:layout_constraintTop_toBottomOf="@id/taleTitleEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.8"
@@ -160,22 +108,77 @@
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/urlEditText" />
 
-    <!-- Description Text -->
+    <!-- Related SCPs Section -->
+    <LinearLayout
+        android:id="@+id/relatedScpsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/urlEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Label -->
+        <TextView
+            android:id="@+id/relatedScpsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tale_related_scps_text"
+            android:textSize="24sp"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp" />
+
+        <!-- EditText for Adding SCPs -->
+        <EditText
+            android:id="@+id/addSCPEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tale_adding_scps_hint"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="@color/light_gray"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:textSize="24sp" />
+
+        <!-- Chip Group -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/relatedScpsChipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="@color/light_gray"
+            app:chipSpacingHorizontal="8dp"
+            app:chipSpacingVertical="4dp" />
+    </LinearLayout>
+
+    <!-- Divider Line -->
+    <View
+        android:id="@+id/dividerLine2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/relatedScpsContainer" />
+
+    <!-- Content Text -->
     <ScrollView
-        android:id="@+id/descriptionScrollView"
+        android:id="@+id/contentScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/dividerLine"
+        app:layout_constraintTop_toBottomOf="@id/dividerLine2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="16dp">
 
         <EditText
-            android:id="@+id/scpDescriptionEditText"
+            android:id="@+id/taleContentEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/scp_description_field"
+            android:hint="@string/tale_content_field"
             android:textSize="18sp"
             android:textColor="@color/white"
             android:padding="16dp"

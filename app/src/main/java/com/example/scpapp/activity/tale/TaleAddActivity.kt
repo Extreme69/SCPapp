@@ -1,26 +1,27 @@
-package com.example.scpapp.activity.scp
+package com.example.scpapp.activity.tale
 
+import android.graphics.Color
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.scpapp.databinding.ActivityScpaddBinding
+import com.example.scpapp.databinding.ActivityTaleAddBinding
 import com.example.scpapp.utils.setButtonColors
-import com.example.scpapp.viewmodel.SCPAddViewModel
+import com.example.scpapp.viewmodel.TaleAddViewModel
+import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class SCPAdd : AppCompatActivity() {
-    private lateinit var binding: ActivityScpaddBinding
-    private val viewModel: SCPAddViewModel by viewModels()
+class TaleAddActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityTaleAddBinding
+    private val viewModel: TaleAddViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityScpaddBinding.inflate(layoutInflater)
+        binding = ActivityTaleAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupUI()
@@ -40,37 +41,50 @@ class SCPAdd : AppCompatActivity() {
             }
         })
 
+
         // Save button click listener
         binding.buttonSave.setOnClickListener {
-            val id = binding.scpIdEditText.text.toString()
-            val title = binding.scpTitleEditText.text.toString()
-            val classification = binding.classificationSpinner.selectedItem.toString()
+            // Get input values
+            val title = binding.taleTitleEditText.text.toString()
             val url = binding.urlEditText.text.toString()
-            val description = binding.scpDescriptionEditText.text.toString()
+            val content = binding.taleContentEditText.text.toString()
 
-            if (viewModel.validateInputs(id, title, classification, url, description)) {
-                viewModel.saveSCP(id, title, classification, url, description)
+            // Collect all scp_id values from the ChipGroup
+            val scpIdList = mutableListOf<String>()
+            for (i in 0 until binding.relatedScpsChipGroup.childCount) {
+                val chip = binding.relatedScpsChipGroup.getChildAt(i) as Chip
+                scpIdList.add(chip.text.toString())
             }
+
+            // Validate and save the tale with scp_ids
+            if (viewModel.validateInputs(title, url, content)) {
+                viewModel.saveTale(title, url, content, scpIdList)  // pass the scpIdList to the ViewModel
+            }
+        }
+
+        binding.addSCPEditText.setOnEditorActionListener { v, actionId, event ->
+            val scpId = binding.addSCPEditText.text.toString().trim()
+            if (scpId.isNotEmpty()) {
+                val chip = Chip(this).apply {
+                    text = scpId
+                    isCloseIconVisible = true
+                    setOnCloseIconClickListener {
+                        binding.relatedScpsChipGroup.removeView(this)
+                    }
+                }
+                binding.relatedScpsChipGroup.addView(chip)
+                binding.addSCPEditText.text?.clear()
+            }
+            true
         }
     }
 
     private fun observeViewModel() {
-        viewModel.classificationTypes.observe(this) { classifications ->
-            val adapter = ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                classifications
-            ).apply {
-                setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            }
-            binding.classificationSpinner.adapter = adapter
-        }
-
         viewModel.validationError.observe(this) { errorMessage ->
             errorMessage?.let { showErrorDialog(it) }
         }
 
-        viewModel.saveSCPResult.observe(this) { result ->
+        viewModel.saveTaleResult.observe(this) { result ->
             result.onSuccess {
                 showSuccessDialog()
             }.onFailure { error ->
@@ -96,7 +110,7 @@ class SCPAdd : AppCompatActivity() {
     private fun showSuccessDialog() {
         val dialog = MaterialAlertDialogBuilder(this)
             .setTitle("Success")
-            .setMessage("SCP created successfully.")
+            .setMessage("Tale created successfully.")
             .setPositiveButton("OK") { _, _ -> finish() }
             .create()
 

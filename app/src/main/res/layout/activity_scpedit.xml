@@ -121,7 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:hint="@string/scp_title_text"
+                    android:hint="@string/title_text"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:padding="8dp"
@@ -130,8 +130,7 @@
                     android:textColorHint="#80FFFFFF"
                     android:background="#AA000000"
                     android:gravity="center"
-                    android:importantForAccessibility="yes"
-                    android:contentDescription="@string/scp_title_edit_text" />
+                    android:importantForAccessibility="yes" />
             </FrameLayout>
 
             <!-- Classification Spinner -->
@@ -142,7 +141,6 @@
                 android:importantForAccessibility="yes"
                 android:padding="8dp"
                 android:background="@color/light_gray"
-                android:contentDescription="@string/classification_spinner"
                 android:layout_marginTop="16dp"
                 android:spinnerMode="dropdown" />
 
@@ -151,14 +149,13 @@
                 android:id="@+id/urlEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter SCP URL"
+                android:hint="@string/scp_url_field"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"
                 android:importantForAccessibility="yes"
                 android:textSize="24sp"
                 android:padding="8dp"
                 android:background="@color/light_gray"
-                android:contentDescription="@string/url_field"
                 android:layout_marginTop="16dp" />
 
             <!-- Divider Line -->
@@ -174,7 +171,7 @@
                 android:id="@+id/scpDescriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter SCP description here..."
+                android:hint="@string/scp_description_field"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:padding="16dp"

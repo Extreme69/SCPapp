@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.scpapp.data.SCP
+import com.example.scpapp.data.scp.SCP
 import com.example.scpapp.databinding.ItemScpBinding
 
 class SCPAdapter(private val onItemClick: (SCP) -> Unit) :

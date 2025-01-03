@@ -80,7 +80,7 @@ class SCPActivity : AppCompatActivity() {
         }
 
         // Set up the add button to open SCPAdd activity
-        binding.buttonScp.setOnClickListener {
+        binding.buttonAddScp.setOnClickListener {
             val intent = Intent(this, SCPAdd::class.java)
             startActivity(intent) // Navigate to the SCPAdd activity
         }

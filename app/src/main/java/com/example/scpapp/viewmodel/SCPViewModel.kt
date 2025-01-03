@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.scpapp.api.SCPRepository
-import com.example.scpapp.data.SCP
+import com.example.scpapp.data.scp.SCP
 import kotlinx.coroutines.launch
 
 class SCPViewModel(private val repository: SCPRepository = SCPRepository()) : ViewModel() {

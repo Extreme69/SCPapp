@@ -175,7 +175,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:autoLink="web"
-                tools:text="Go to SCP Wiki" />
+                tools:text="@string/scp_wiki_hyperlink_text" />
 
             <!-- SCP Tales Header -->
             <TextView
@@ -187,7 +187,7 @@
                 android:layout_marginTop="16dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
-                tools:text="Related Tales:" />
+                tools:text="@string/scp_related_tales_text" />
 
             <!-- SCP Tales List -->
             <LinearLayout

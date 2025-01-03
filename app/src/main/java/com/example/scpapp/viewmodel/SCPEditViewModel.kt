@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.scpapp.api.SCPRepository
-import com.example.scpapp.data.SCPUpdateRequest
+import com.example.scpapp.data.scp.SCPUpdateRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

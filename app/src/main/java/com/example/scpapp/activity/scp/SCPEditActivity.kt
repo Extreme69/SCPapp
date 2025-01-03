@@ -9,10 +9,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.example.scpapp.data.SCP
-import com.example.scpapp.data.SCPUpdateRequest
+import com.example.scpapp.data.scp.SCP
+import com.example.scpapp.data.scp.SCPUpdateRequest
 import com.example.scpapp.databinding.ActivityScpeditBinding
+import com.example.scpapp.utils.setButtonColors
 import com.example.scpapp.viewmodel.SCPEditViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SCPEditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScpeditBinding
@@ -163,7 +165,7 @@ class SCPEditActivity : AppCompatActivity() {
     }
 
     private fun showUnsavedChangesDialog() {
-        AlertDialog.Builder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setTitle("Unsaved Changes")
             .setMessage("Do you want to discard the changes?")
             .setPositiveButton("Discard") { _, _ ->
@@ -171,33 +173,41 @@ class SCPEditActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancel", null)
             .create()
-            .show()
+
+        dialog.setButtonColors()
+        dialog.show()
     }
 
     private fun showSuccessDialogSave() {
-        AlertDialog.Builder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setTitle("Success")
             .setMessage("SCP updated successfully.")
             .setPositiveButton("OK") { _, _ -> finish() }
             .create()
-            .show()
+
+        dialog.setButtonColors()
+        dialog.show()
     }
 
     private fun showSuccessDialogDelete() {
-        AlertDialog.Builder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setTitle("Success")
             .setMessage("SCP deleted successfully.")
             .setPositiveButton("OK") { _, _ -> finish() }
             .create()
-            .show()
+
+        dialog.setButtonColors()
+        dialog.show()
     }
 
     private fun showErrorDialog(message: String) {
-        AlertDialog.Builder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
             .setTitle("Error")
             .setMessage(message)
             .setPositiveButton("OK", null)
             .create()
-            .show()
+
+        dialog.setButtonColors()
+        dialog.show()
     }
 }

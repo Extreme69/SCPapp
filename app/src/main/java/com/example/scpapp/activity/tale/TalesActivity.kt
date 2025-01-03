@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.scpapp.activity.scp.SCPAdd
 import com.example.scpapp.adapter.TaleAdapter
 import com.example.scpapp.databinding.ActivityTalesBinding
 import com.example.scpapp.viewmodel.TalesViewModel
@@ -76,6 +77,12 @@ class TalesActivity : AppCompatActivity() {
         // Set up the back button
         binding.buttonBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed() // Navigate back to the previous activity
+        }
+
+        // Set up the add button to open TaleAdd activity
+        binding.buttonAddTale.setOnClickListener {
+            val intent = Intent(this, TaleAddActivity::class.java)
+            startActivity(intent) // Navigate to the TaleAddActivity activity
         }
     }
 

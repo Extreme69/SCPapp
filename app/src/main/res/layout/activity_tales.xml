@@ -74,9 +74,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_tale" />
 
-    <!-- Edit Button at Bottom-Right of the Screen -->
+    <!-- Add Button at Bottom-Right of the Screen -->
     <ImageButton
-        android:id="@+id/button_tale"
+        android:id="@+id/button_add_tale"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:background="@drawable/circular_button_background_light_gray"

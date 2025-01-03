@@ -130,16 +130,17 @@
                 android:id="@+id/textViewTaleWikiLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="28sp"
-                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/link_color"
+                android:autoLink="web"
                 android:clickable="true"
                 android:focusable="true"
-                android:autoLink="web"
-                tools:text="Go to SCP Wiki" />
+                android:textColor="@color/link_color"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck"
+                tools:text="@string/tale_wiki_hyperlink_text" />
 
             <!-- SCP Header -->
             <TextView
@@ -151,7 +152,7 @@
                 android:layout_marginTop="16dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
-                tools:text="Related SCPs:" />
+                tools:text="@string/tale_related_scps_text" />
 
             <!-- SCP List -->
             <LinearLayout
