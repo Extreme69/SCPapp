@@ -61,6 +61,7 @@ dependencies {
     implementation (libs.androidx.lifecycle.viewmodel.ktx)  // Added lifecycle viewmodel
     implementation(libs.logging.interceptor)                // Added logging
     implementation (libs.github.glide)                      // Added glide
+    implementation (libs.androidx.core.splashscreen)        // Added splashscreen
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

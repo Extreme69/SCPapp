@@ -15,12 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SCPApp"
         tools:targetApi="31">
-
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.SCPApp">
+            android:theme="@style/Theme.SCPApp.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
