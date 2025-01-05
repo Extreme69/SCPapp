@@ -177,17 +177,25 @@
                 android:autoLink="web"
                 tools:text="@string/scp_wiki_hyperlink_text" />
 
+            <!-- Divider Line -->
+            <View
+                android:id="@+id/dividerLine3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white" />
+
             <!-- SCP Tales Header -->
             <TextView
                 android:id="@+id/textViewSCPTalesHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_marginTop="16dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
-                tools:text="@string/scp_related_tales_text" />
+                android:text="@string/scp_related_tales_text" />
 
             <!-- SCP Tales List -->
             <LinearLayout

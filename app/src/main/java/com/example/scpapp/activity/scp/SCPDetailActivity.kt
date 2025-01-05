@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.scpapp.R
+import com.example.scpapp.activity.tale.TaleDetailActivity
 import com.example.scpapp.viewmodel.scp.SCPDetailViewModel
 
 class SCPDetailActivity : AppCompatActivity() {
@@ -94,14 +96,27 @@ class SCPDetailActivity : AppCompatActivity() {
                 // Populate SCP Tales
                 val talesLayout = findViewById<LinearLayout>(R.id.linearLayoutSCPTales)
                 talesLayout.removeAllViews()
-                details.scpTales.forEach { tale ->
-                    val taleTextView = TextView(this).apply {
-                        text = tale
-                        textSize = 16f
-                        setTextColor(resources.getColor(android.R.color.black, null))
-                        setPadding(16, 8, 16, 8)
+
+                details.scpTales.forEach { taleId ->
+                    detailViewModel.fetchTaleDetails(taleId).observe(this) { taleDetails ->
+                        if (taleDetails != null) {
+                            val taleButton = Button(this).apply {
+                                text = taleDetails.title
+                                textSize = 18f
+                                setTextColor(resources.getColor(android.R.color.black, null))
+                                setPadding(16, 8, 16, 8)
+                                setOnClickListener {
+                                    val intent = Intent(this@SCPDetailActivity, TaleDetailActivity::class.java).apply {
+                                        putExtra("tale_id", taleId) // Pass the tale ID to TaleDetailActivity
+                                    }
+                                    startActivity(intent)
+                                }
+                            }
+                            talesLayout.addView(taleButton)
+                        } else {
+                            Log.e("Error", "Failed to fetch details for tale ID: $taleId")
+                        }
                     }
-                    talesLayout.addView(taleTextView)
                 }
 
                 // Set up SCP Wiki Link

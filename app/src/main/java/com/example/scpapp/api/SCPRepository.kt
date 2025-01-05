@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.scpapp.data.scp.SCP
 import com.example.scpapp.data.scp.SCPRequest
 import com.example.scpapp.data.scp.SCPUpdateRequest
+import com.example.scpapp.data.tale.Tale
 import retrofit2.Response
 
 class SCPRepository {
@@ -102,6 +103,23 @@ class SCPRepository {
         } catch (e: Exception) {
             Log.e("SCPRepository", "Error making search API request", e)
             e.printStackTrace()
+            null
+        }
+    }
+
+    // Only used for getting the title of related tales.
+    suspend fun getTaleDetails(taleId: String): Tale? {
+        return try {
+            val response = api.getTaleDetails(taleId)
+            if (response.isSuccessful) {
+                Log.d("TalesRepository", "Successfully fetched tale details for ID: $taleId")
+                response.body()?.data?.firstOrNull()
+            } else {
+                Log.e("TalesRepository", "Failed to fetch tale details for ID: $taleId")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("TalesRepository", "Error fetching tale details for ID: $taleId", e)
             null
         }
     }

@@ -18,4 +18,15 @@ class SCPDetailViewModel(private val repository: SCPRepository = SCPRepository()
             emit(null) // Emit null in case of error
         }
     }
+
+    fun fetchTaleDetails(taleId: String) = liveData(Dispatchers.IO) {
+        try {
+            val taleDetails = repository.getTaleDetails(taleId)
+            Log.d("SCPDetailViewModel", "Fetched Tale details: $taleDetails")
+            emit(taleDetails)
+        } catch (e: Exception) {
+            Log.e("SCPDetailViewModel", "Error fetching Tale details for ID: $taleId", e)
+            emit(null)
+        }
+    }
 }

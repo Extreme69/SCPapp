@@ -3,6 +3,8 @@ package com.example.scpapp.activity.tale
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.scpapp.R
+import com.example.scpapp.activity.scp.SCPDetailActivity
 import com.example.scpapp.viewmodel.tale.TaleDetailViewModel
 
 class TaleDetailActivity : AppCompatActivity() {
@@ -64,16 +67,23 @@ class TaleDetailActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.textViewTaleContent).text = details.content
 
                 // Populate SCPs
-                val scpLayout = findViewById<LinearLayout>(R.id.linearLayoutSCPs)
-                scpLayout.removeAllViews()
-                details.scpId.forEach { scp ->
-                    val scpTextView = TextView(this).apply {
-                        text = scp
-                        textSize = 16f
+                val scpsLayout = findViewById<LinearLayout>(R.id.linearLayoutSCPs)
+                scpsLayout.removeAllViews()
+
+                details.scpId.forEach { scpId ->
+                    val scpButton = Button(this).apply {
+                        text = scpId
+                        textSize = 18f
                         setTextColor(resources.getColor(android.R.color.black, null))
                         setPadding(16, 8, 16, 8)
+                        setOnClickListener {
+                            val intent = Intent(this@TaleDetailActivity, SCPDetailActivity::class.java).apply {
+                                putExtra("scp_id", scpId) // Pass the SCP ID to SCPDetailActivity
+                            }
+                            startActivity(intent)
+                        }
                     }
-                    scpLayout.addView(scpTextView)
+                    scpsLayout.addView(scpButton)
                 }
 
                 // Set up Tale Wiki Link

@@ -15,6 +15,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SCPApp"
         tools:targetApi="31">
+
+        <activity
+            android:name=".activity.SplashActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.SCPApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".activity.tale.TaleEditActivity"
             android:exported="false" />
@@ -23,9 +36,6 @@
             android:exported="false" />
         <activity
             android:name=".activity.tale.TaleDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.tale.TaleActivity"
             android:exported="false" />
         <activity
             android:name=".activity.scp.SCPEditActivity"
@@ -47,15 +57,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.SCPApp">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>
