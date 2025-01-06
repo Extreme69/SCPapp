@@ -10,10 +10,8 @@ import com.example.scpapp.data.scp.TaleUpdateRequest
 import com.example.scpapp.data.tale.Tale
 import com.example.scpapp.databinding.ActivityTaleEditBinding
 import com.example.scpapp.utils.DialogUtils
-import com.example.scpapp.utils.DialogUtils.setButtonColors
 import com.example.scpapp.viewmodel.tale.TaleEditViewModel
 import com.google.android.material.chip.Chip
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class TaleEditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTaleEditBinding

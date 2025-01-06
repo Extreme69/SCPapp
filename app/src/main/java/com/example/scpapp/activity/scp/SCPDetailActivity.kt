@@ -47,9 +47,6 @@ class SCPDetailActivity : AppCompatActivity() {
 
         // Initialize ViewModel
         detailViewModel = ViewModelProvider(this).get(SCPDetailViewModel::class.java)
-
-        // Fetch and display SCP details
-        fetchAndDisplayDetails(scpId)
     }
 
     override fun onResume() {

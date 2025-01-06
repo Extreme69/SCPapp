@@ -8,7 +8,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 // Utility object for showing common dialogs
 object DialogUtils {
     // Extension function to set dialog button colors to a custom hex color
-    fun AlertDialog.setButtonColors() {
+    private fun AlertDialog.setButtonColors() {
         this.setOnShowListener {
             val dialogButtonColor = Color.parseColor("#226128") // Hex color code
             this.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(dialogButtonColor)
