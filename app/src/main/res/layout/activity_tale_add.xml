@@ -52,7 +52,7 @@
             android:id="@+id/buttonSave"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/circular_button_background"
+            android:background="@drawable/circular_button_background_white"
             android:src="@drawable/ic_save"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"

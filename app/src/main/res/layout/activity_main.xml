@@ -45,6 +45,14 @@
             android:src="@drawable/ic_settings"
             android:scaleType="centerInside"
             android:contentDescription="@string/settings_button" />
-
     </LinearLayout>
+
+    <!-- Fullscreen overlay for the animation -->
+    <View
+        android:id="@+id/color_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray"
+        android:visibility="gone" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
