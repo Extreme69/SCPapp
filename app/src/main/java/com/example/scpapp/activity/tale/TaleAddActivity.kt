@@ -6,10 +6,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.scpapp.databinding.ActivityTaleAddBinding
-import com.example.scpapp.utils.setButtonColors
+import com.example.scpapp.utils.DialogUtils
 import com.example.scpapp.viewmodel.tale.TaleAddViewModel
 import com.google.android.material.chip.Chip
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class TaleAddActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTaleAddBinding
@@ -29,13 +28,17 @@ class TaleAddActivity : AppCompatActivity() {
     private fun setupUI() {
         // Back button click listener
         binding.buttonBack.setOnClickListener {
-            showUnsavedChangesDialog()
+            DialogUtils.showUnsavedChangesDialog(this){
+                finish()
+            }
         }
 
         // Handle system back button
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                showUnsavedChangesDialog()
+                DialogUtils.showUnsavedChangesDialog(this@TaleAddActivity) {
+                    finish()
+                }
             }
         })
 
@@ -79,51 +82,17 @@ class TaleAddActivity : AppCompatActivity() {
 
     private fun observeViewModel() {
         viewModel.validationError.observe(this) { errorMessage ->
-            errorMessage?.let { showErrorDialog(it) }
+            errorMessage?.let { DialogUtils.showErrorDialog(this, it) }
         }
 
         viewModel.saveTaleResult.observe(this) { result ->
             result.onSuccess {
-                showSuccessDialog()
+                DialogUtils.showSuccessDialog(this, "Tale created successfully.") {
+                    finish()
+                }
             }.onFailure { error ->
-                showErrorDialog(error.localizedMessage ?: "An unknown error occurred")
+                DialogUtils.showErrorDialog(this, error.localizedMessage ?: "An unknown error occurred")
             }
         }
-    }
-
-    private fun showUnsavedChangesDialog() {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Unsaved Changes")
-            .setMessage("Do you want to discard the changes?")
-            .setPositiveButton("Discard") { _, _ ->
-                finish()
-            }
-            .setNegativeButton("Cancel", null)
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
-    }
-
-    private fun showSuccessDialog() {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Success")
-            .setMessage("Tale created successfully.")
-            .setPositiveButton("OK") { _, _ -> finish() }
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
-    }
-
-    private fun showErrorDialog(message: String) {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Error")
-            .setMessage(message)
-            .setPositiveButton("OK", null)
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
     }
 }

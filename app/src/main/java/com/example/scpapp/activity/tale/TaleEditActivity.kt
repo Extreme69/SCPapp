@@ -9,7 +9,8 @@ import androidx.lifecycle.Observer
 import com.example.scpapp.data.scp.TaleUpdateRequest
 import com.example.scpapp.data.tale.Tale
 import com.example.scpapp.databinding.ActivityTaleEditBinding
-import com.example.scpapp.utils.setButtonColors
+import com.example.scpapp.utils.DialogUtils
+import com.example.scpapp.utils.DialogUtils.setButtonColors
 import com.example.scpapp.viewmodel.tale.TaleEditViewModel
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -32,13 +33,17 @@ class TaleEditActivity : AppCompatActivity() {
 
         // Back button click listener
         binding.buttonBack.setOnClickListener {
-            showUnsavedChangesDialog()
+            DialogUtils.showUnsavedChangesDialog(this){
+                finish()
+            }
         }
 
         // Handle system back button
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                showUnsavedChangesDialog()
+                DialogUtils.showUnsavedChangesDialog(this@TaleEditActivity) {
+                    finish()
+                }
             }
         })
 
@@ -92,7 +97,9 @@ class TaleEditActivity : AppCompatActivity() {
         // Delete button click listener
         binding.buttonDelete.setOnClickListener {
             if (!taleId.isNullOrEmpty()) {
-                showDeleteDialog(taleId)
+                DialogUtils.showDeleteDialog(this, "Are you sure you want to delete this tale?"){
+                    viewModel.deleteTale(taleId)
+                }
             } else {
                 Toast.makeText(this, "Tale ID is missing", Toast.LENGTH_SHORT).show()
             }
@@ -115,24 +122,28 @@ class TaleEditActivity : AppCompatActivity() {
 
     private fun observeViewModel() {
         viewModel.validationError.observe(this) { errorMessage ->
-            errorMessage?.let { showErrorDialog(it) }
+            errorMessage?.let { DialogUtils.showErrorDialog(this, it) }
         }
 
         // Observe save result
         viewModel.saveTaleResult.observe(this) { result ->
             result.onSuccess {
-                showSuccessDialogSave()
+                DialogUtils.showSuccessDialog(this, "Tale updated successfully.") {
+                    finish()
+                }
             }.onFailure { error ->
-                showErrorDialog(error.localizedMessage ?: "An unknown error occurred")
+                DialogUtils.showErrorDialog(this, error.localizedMessage ?: "An unknown error occurred")
             }
         }
 
         // Observe delete result
         viewModel.deleteTaleResult.observe(this) { result ->
             result.onSuccess {
-                showSuccessDialogDelete()
+                DialogUtils.showSuccessDialog(this, "Tale deleted successfully.") {
+                    finish()
+                }
             }.onFailure { error ->
-                showErrorDialog(error.localizedMessage ?: "An unknown error occurred")
+                DialogUtils.showErrorDialog(this, error.localizedMessage ?: "An unknown error occurred")
             }
         }
     }
@@ -163,66 +174,5 @@ class TaleEditActivity : AppCompatActivity() {
             // Add the chip to the ChipGroup
             binding.relatedScpsChipGroup.addView(chip)
         }
-    }
-
-    private fun showUnsavedChangesDialog() {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Unsaved Changes")
-            .setMessage("Do you want to discard the changes?")
-            .setPositiveButton("Discard") { _, _ ->
-                finish()
-            }
-            .setNegativeButton("Cancel", null)
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
-    }
-
-    private fun showSuccessDialogSave() {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Success")
-            .setMessage("Tale updated successfully.")
-            .setPositiveButton("OK") { _, _ -> finish() }
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
-    }
-
-    private fun showSuccessDialogDelete() {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Success")
-            .setMessage("Tale deleted successfully.")
-            .setPositiveButton("OK") { _, _ -> finish() }
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
-    }
-
-    private fun showErrorDialog(message: String) {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Error")
-            .setMessage(message)
-            .setPositiveButton("OK", null)
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
-    }
-
-    private fun showDeleteDialog(taleId: String) {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Delete tale")
-            .setMessage("Are you sure you want to delete this tale?")
-            .setPositiveButton("Yes") { _, _ ->
-                viewModel.deleteTale(taleId)
-            }
-            .setNegativeButton("Cancel", null)
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
     }
 }

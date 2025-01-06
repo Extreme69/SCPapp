@@ -6,15 +6,13 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.scpapp.data.scp.SCP
 import com.example.scpapp.data.scp.SCPUpdateRequest
 import com.example.scpapp.databinding.ActivityScpeditBinding
-import com.example.scpapp.utils.setButtonColors
+import com.example.scpapp.utils.DialogUtils
 import com.example.scpapp.viewmodel.scp.SCPEditViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SCPEditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScpeditBinding
@@ -41,28 +39,26 @@ class SCPEditActivity : AppCompatActivity() {
 
         // Back button click listener
         binding.buttonBack.setOnClickListener {
-            showUnsavedChangesDialog()
+            DialogUtils.showUnsavedChangesDialog(this){
+                finish()
+            }
         }
 
         // Handle system back button
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                showUnsavedChangesDialog()
+                DialogUtils.showUnsavedChangesDialog(this@SCPEditActivity) {
+                    finish()
+                }
             }
         })
 
         // Delete button click listener
         binding.buttonDelete.setOnClickListener {
             if (!scpId.isNullOrEmpty()) {
-                AlertDialog.Builder(this)
-                    .setTitle("Delete SCP")
-                    .setMessage("Are you sure you want to delete this SCP?")
-                    .setPositiveButton("Yes") { _, _ ->
-                        viewModel.deleteSCP(scpId)
-                    }
-                    .setNegativeButton("Cancel", null)
-                    .create()
-                    .show()
+                DialogUtils.showDeleteDialog(this, "Are you sure you want to delete this SCP?"){
+                    viewModel.deleteSCP(scpId)
+                }
             } else {
                 Toast.makeText(this, "SCP ID is missing", Toast.LENGTH_SHORT).show()
             }
@@ -124,24 +120,28 @@ class SCPEditActivity : AppCompatActivity() {
         }
 
         viewModel.validationError.observe(this) { errorMessage ->
-            errorMessage?.let { showErrorDialog(it) }
+            errorMessage?.let { DialogUtils.showErrorDialog(this, it) }
         }
 
         // Observe save result
         viewModel.saveSCPResult.observe(this) { result ->
             result.onSuccess {
-                showSuccessDialogSave()
+                DialogUtils.showSuccessDialog(this, "SCP updated successfully.") {
+                    finish()
+                }
             }.onFailure { error ->
-                showErrorDialog(error.localizedMessage ?: "An unknown error occurred")
+                DialogUtils.showErrorDialog(this, error.localizedMessage ?: "An unknown error occurred")
             }
         }
 
         // Observe delete result
         viewModel.deleteSCPResult.observe(this) { result ->
             result.onSuccess {
-                showSuccessDialogDelete()
+                DialogUtils.showSuccessDialog(this, "SCP deleted successfully.") {
+                    finish()
+                }
             }.onFailure { error ->
-                showErrorDialog(error.localizedMessage ?: "An unknown error occurred")
+                DialogUtils.showErrorDialog(this, error.localizedMessage ?: "An unknown error occurred")
             }
         }
     }
@@ -162,52 +162,5 @@ class SCPEditActivity : AppCompatActivity() {
     private fun getClassificationIndex(classification: String): Int {
         val classifications = viewModel.classificationTypes.value ?: return 0
         return classifications.indexOf(classification).takeIf { it >= 0 } ?: 0
-    }
-
-    private fun showUnsavedChangesDialog() {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Unsaved Changes")
-            .setMessage("Do you want to discard the changes?")
-            .setPositiveButton("Discard") { _, _ ->
-                finish()
-            }
-            .setNegativeButton("Cancel", null)
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
-    }
-
-    private fun showSuccessDialogSave() {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Success")
-            .setMessage("SCP updated successfully.")
-            .setPositiveButton("OK") { _, _ -> finish() }
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
-    }
-
-    private fun showSuccessDialogDelete() {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Success")
-            .setMessage("SCP deleted successfully.")
-            .setPositiveButton("OK") { _, _ -> finish() }
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
-    }
-
-    private fun showErrorDialog(message: String) {
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Error")
-            .setMessage(message)
-            .setPositiveButton("OK", null)
-            .create()
-
-        dialog.setButtonColors()
-        dialog.show()
     }
 }
