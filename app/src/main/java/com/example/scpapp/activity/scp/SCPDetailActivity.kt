@@ -11,10 +11,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.scpapp.R
 import com.example.scpapp.activity.tale.TaleDetailActivity
+import com.example.scpapp.data.scp.SCP
 import com.example.scpapp.viewmodel.scp.SCPDetailViewModel
 
 class SCPDetailActivity : AppCompatActivity() {
@@ -48,92 +48,100 @@ class SCPDetailActivity : AppCompatActivity() {
         // Initialize ViewModel
         detailViewModel = ViewModelProvider(this).get(SCPDetailViewModel::class.java)
 
-        // Fetch and observe SCP details
-        detailViewModel.fetchSCPDetails(scpId).observe(this, Observer { details ->
+        // Fetch and display SCP details
+        fetchAndDisplayDetails(scpId)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val scpId = intent.getStringExtra("scp_id")
+        if (scpId != null) {
+            fetchAndDisplayDetails(scpId) // Refresh details when the activity is resumed
+        }
+    }
+
+    private fun fetchAndDisplayDetails(scpId: String) {
+        detailViewModel.fetchSCPDetails(scpId).observe(this) { details ->
             if (details != null) {
-                // Update UI with details
-                findViewById<TextView>(R.id.textViewSCPTitle).text = "${details.id}: ${details.title}"
+                updateUI(details)
+            } else {
+                Toast.makeText(this, "Failed to load SCP details.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+        }
+    }
 
-                // Set Classification Image
-                val classificationImageView = findViewById<ImageView>(R.id.imageViewSCPClassification)
-                val classificationImageRes = when (details.classification.lowercase()) {
-                    "keter" -> R.drawable.ic_scp_keter
-                    "euclid" -> R.drawable.ic_scp_euclid
-                    "safe" -> R.drawable.ic_scp_safe
-                    "apollyon" -> R.drawable.ic_scp_apollyon
-                    "decommissioned" -> R.drawable.ic_scp_decommissioned
-                    "explained" -> R.drawable.ic_scp_explained
-                    "neutralized" -> R.drawable.ic_scp_neutralized
-                    "pending" -> R.drawable.ic_scp_pending
-                    "thaumiel" -> R.drawable.ic_scp_thaumiel
-                    "ticonderoga" -> R.drawable.ic_scp_ticonderoga
-                    "archon" -> R.drawable.ic_scp_archon
-                    else -> Log.d("SCPDetailActivity", "No image for this classification: ${details.classification}")
-                }
-                classificationImageView.setImageResource(classificationImageRes)
+    private fun updateUI(details: SCP) {
+        findViewById<TextView>(R.id.textViewSCPTitle).text = "${details.id}: ${details.title}"
 
-                // Set classification text
-                findViewById<TextView>(R.id.textViewSCPClassification).text = details.classification
+        val classificationImageView = findViewById<ImageView>(R.id.imageViewSCPClassification)
+        val classificationImageRes = when (details.classification.lowercase()) {
+            "keter" -> R.drawable.ic_scp_keter
+            "euclid" -> R.drawable.ic_scp_euclid
+            "safe" -> R.drawable.ic_scp_safe
+            "apollyon" -> R.drawable.ic_scp_apollyon
+            "decommissioned" -> R.drawable.ic_scp_decommissioned
+            "explained" -> R.drawable.ic_scp_explained
+            "neutralized" -> R.drawable.ic_scp_neutralized
+            "pending" -> R.drawable.ic_scp_pending
+            "thaumiel" -> R.drawable.ic_scp_thaumiel
+            "ticonderoga" -> R.drawable.ic_scp_ticonderoga
+            "archon" -> R.drawable.ic_scp_archon
+            else -> {
+                Log.d("SCPDetailActivity", "No image for this classification: ${details.classification}")
+                0 // Default value, no image
+            }
+        }
+        if (classificationImageRes != 0) classificationImageView.setImageResource(classificationImageRes)
 
-                val ratingArrowView = findViewById<ImageView>(R.id.imageViewSCPRatingArrow)
-                val ratingTextView = findViewById<TextView>(R.id.textViewSCPRating)
+        findViewById<TextView>(R.id.textViewSCPClassification).text = details.classification
 
-                if (details.rating >= 0) {
-                    ratingArrowView.setImageResource(R.drawable.ic_up_arrow)
-                } else {
-                    ratingArrowView.setImageResource(R.drawable.ic_down_arrow)
-                }
-                ratingTextView.text = details.rating.toString()
+        val ratingArrowView = findViewById<ImageView>(R.id.imageViewSCPRatingArrow)
+        val ratingTextView = findViewById<TextView>(R.id.textViewSCPRating)
 
-                findViewById<TextView>(R.id.textViewSCPDescription).text = details.description
+        if (details.rating >= 0) {
+            ratingArrowView.setImageResource(R.drawable.ic_up_arrow)
+        } else {
+            ratingArrowView.setImageResource(R.drawable.ic_down_arrow)
+        }
+        ratingTextView.text = details.rating.toString()
 
-                /*
-                // Load image using Glide
-                val imageView = findViewById<ImageView>(R.id.imageViewSCP)
-                Glide.with(this).load(details.photoUrl).into(imageView)
-                */
+        findViewById<TextView>(R.id.textViewSCPDescription).text = details.description
 
-                // Populate SCP Tales
-                val talesLayout = findViewById<LinearLayout>(R.id.linearLayoutSCPTales)
-                talesLayout.removeAllViews()
-
-                details.scpTales.forEach { taleId ->
-                    detailViewModel.fetchTaleDetails(taleId).observe(this) { taleDetails ->
-                        if (taleDetails != null) {
-                            val taleButton = Button(this).apply {
-                                text = taleDetails.title
-                                textSize = 18f
-                                setTextColor(resources.getColor(android.R.color.black, null))
-                                setPadding(16, 8, 16, 8)
-                                setOnClickListener {
-                                    val intent = Intent(this@SCPDetailActivity, TaleDetailActivity::class.java).apply {
-                                        putExtra("tale_id", taleId) // Pass the tale ID to TaleDetailActivity
-                                    }
-                                    startActivity(intent)
-                                }
+        // Populate SCP Tales
+        val talesLayout = findViewById<LinearLayout>(R.id.linearLayoutSCPTales)
+        talesLayout.removeAllViews()
+        details.scpTales.forEach { taleId ->
+            detailViewModel.fetchTaleDetails(taleId).observe(this) { taleDetails ->
+                if (taleDetails != null) {
+                    val taleButton = Button(this).apply {
+                        text = taleDetails.title
+                        textSize = 18f
+                        setTextColor(resources.getColor(android.R.color.black, null))
+                        setPadding(16, 8, 16, 8)
+                        setOnClickListener {
+                            val intent = Intent(this@SCPDetailActivity, TaleDetailActivity::class.java).apply {
+                                putExtra("tale_id", taleId) // Pass the tale ID to TaleDetailActivity
                             }
-                            talesLayout.addView(taleButton)
-                        } else {
-                            Log.e("Error", "Failed to fetch details for tale ID: $taleId")
+                            startActivity(intent)
                         }
                     }
+                    talesLayout.addView(taleButton)
+                } else {
+                    Log.e("Error", "Failed to fetch details for tale ID: $taleId")
                 }
-
-                // Set up SCP Wiki Link
-                val wikiLinkTextView = findViewById<TextView>(R.id.textViewSCPWikiLink)
-                wikiLinkTextView.text = "Go to SCP Wiki"
-                wikiLinkTextView.setOnClickListener {
-                    val url = details.url
-                    val intent = Intent(Intent.ACTION_VIEW).apply {
-                        data = Uri.parse(url)
-                    }
-                    startActivity(intent)
-                }
-
-            } else {
-                // Handle error or show a message
-                Toast.makeText(this, "Failed to load SCP details.", Toast.LENGTH_SHORT).show()
             }
-        })
+        }
+
+        // Set up SCP Wiki Link
+        val wikiLinkTextView = findViewById<TextView>(R.id.textViewSCPWikiLink)
+        wikiLinkTextView.text = "Go to SCP Wiki"
+        wikiLinkTextView.setOnClickListener {
+            val url = details.url
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(url)
+            }
+            startActivity(intent)
+        }
     }
 }

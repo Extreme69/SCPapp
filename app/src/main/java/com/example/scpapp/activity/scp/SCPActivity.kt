@@ -86,6 +86,13 @@ class SCPActivity : AppCompatActivity() {
         }
     }
 
+    // Override onResume to reload the SCPs when the activity comes back into view
+    override fun onResume() {
+        super.onResume()
+        // Refresh the list of SCPs when the activity is resumed
+        viewModel.fetchSCPs() // Fetch all SCPs again when returning to the activity
+    }
+
     private fun setupRecyclerView() {
         binding.recyclerViewSCPs.apply {
             layoutManager = LinearLayoutManager(this@SCPActivity)

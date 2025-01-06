@@ -10,7 +10,6 @@
     <!-- Splash Screen Theme -->
     <style name="Theme.SCPApp.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/black</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/scp_splash</item>
         <item name="postSplashScreenTheme">@style/Theme.SCPApp</item>
     </style>
 </resources>

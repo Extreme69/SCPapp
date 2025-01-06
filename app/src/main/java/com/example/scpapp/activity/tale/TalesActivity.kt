@@ -63,7 +63,7 @@ class TalesActivity : AppCompatActivity() {
                     if (query.isNotEmpty()) {
                         viewModel.searchTales(query) // Trigger search in ViewModel
                     } else {
-                        // If search bar is empty, fetch all SCPs again
+                        // If search bar is empty, fetch all tales again
                         viewModel.fetchTales()
                     }
                 }
@@ -81,8 +81,15 @@ class TalesActivity : AppCompatActivity() {
         // Set up the add button to open TaleAdd activity
         binding.buttonAddTale.setOnClickListener {
             val intent = Intent(this, TaleAddActivity::class.java)
-            startActivity(intent) // Navigate to the TaleAddActivity activity
+            startActivity(intent) // Navigate to the TaleAddActivity
         }
+    }
+
+    // Override onResume to reload the tales when the activity comes back into view
+    override fun onResume() {
+        super.onResume()
+        // Refresh the list of tales when the activity is resumed
+        viewModel.fetchTales() // Fetch all tales again when returning to the activity
     }
 
     private fun setupRecyclerView() {

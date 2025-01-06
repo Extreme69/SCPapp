@@ -7,9 +7,16 @@ import android.widget.ImageButton
 import com.example.scpapp.R
 import com.example.scpapp.activity.scp.SCPActivity
 import com.example.scpapp.activity.tale.TalesActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
+
+        splashScreen.setKeepOnScreenCondition {
+            false
+        }
+
         super.onCreate(savedInstanceState)
         // Set content view to the XML layout
         setContentView(R.layout.activity_main)
