@@ -32,10 +32,10 @@ class SCPAdapter(private val onItemClick: (SCP) -> Unit) :
 
         fun bind(scp: SCP) {
             // Bind the SCP ID and Title (e.g., "SCP-173: The Statue")
-            binding.textViewSCPTitle.text = "${scp.id}: ${scp.title}"
+            binding.textViewSCPTitle.text = "${scp.id}: ${scp.title} - ${scp.classification}"
 
             // Bind the SCP Classification (e.g., "Keter")
-            binding.textViewSCPClassification.text = scp.classification
+            binding.textViewSCPClassification.text = "By: ${scp.creator}"
 
             // Bind the SCP Rating (e.g., "93")
             binding.textViewSCPRating.text = scp.rating.toString()

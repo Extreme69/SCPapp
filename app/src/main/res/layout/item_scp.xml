@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <!-- SCP ID and Title displayed at the top -->
+    <!-- SCP ID, Title and classification displayed at the top -->
     <TextView
         android:id="@+id/textViewSCPTitle"
         android:layout_width="0dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- SCP Classification displayed below the ID and Title -->
+    <!-- SCP creator displayed below the Title -->
     <TextView
         android:id="@+id/textViewSCPClassification"
         android:layout_width="0dp"

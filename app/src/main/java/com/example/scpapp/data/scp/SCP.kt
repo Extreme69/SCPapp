@@ -11,5 +11,6 @@ data class SCP(
     @SerializedName("rating") val rating: Int,
     @SerializedName("scp_tales") val scpTales: List<String>,
     @SerializedName("url") val url: String,
-    @SerializedName("series") val series: String
+    @SerializedName("series") val series: String,
+    @SerializedName("creator") val creator: String
 )
