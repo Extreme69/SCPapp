@@ -28,4 +28,6 @@
     <string name="tale_wiki_hyperlink_text">Go to tale Wiki</string>
     <string name="tale_related_scps_text">Related SCPs:</string>
     <string name="tale_adding_scps_hint">Type an SCP ID and press Enter:</string>
+    <string name="prompt_text_username">Enter your username:</string>
+    <string name="username_hint">Username</string>
 </resources>
