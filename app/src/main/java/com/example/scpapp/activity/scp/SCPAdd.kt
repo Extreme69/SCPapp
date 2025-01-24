@@ -4,19 +4,27 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.scpapp.SharedPreferencesRepository
+import com.example.scpapp.api.SCPRepository
 import com.example.scpapp.databinding.ActivityScpaddBinding
 import com.example.scpapp.utils.DialogUtils
 import com.example.scpapp.viewmodel.scp.SCPAddViewModel
 
 class SCPAdd : AppCompatActivity() {
     private lateinit var binding: ActivityScpaddBinding
-    private val viewModel: SCPAddViewModel by viewModels()
+    private lateinit var viewModel: SCPAddViewModel // No longer using `by viewModels()`
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        // Initialize the ViewModel with the repository
+        val sharedPreferencesRepository = SharedPreferencesRepository(this)
+        viewModel = SCPAddViewModel(
+            repository = SCPRepository(),
+            sharedPreferencesRepository = sharedPreferencesRepository
+        )
 
         binding = ActivityScpaddBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -28,7 +36,7 @@ class SCPAdd : AppCompatActivity() {
     private fun setupUI() {
         // Back button click listener
         binding.buttonBack.setOnClickListener {
-            DialogUtils.showUnsavedChangesDialog(this){
+            DialogUtils.showUnsavedChangesDialog(this) {
                 finish()
             }
         }

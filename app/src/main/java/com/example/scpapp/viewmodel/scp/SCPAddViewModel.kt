@@ -4,11 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.scpapp.SharedPreferencesRepository
 import com.example.scpapp.api.SCPRepository
 import com.example.scpapp.data.scp.SCPRequest
 import kotlinx.coroutines.launch
 
-class SCPAddViewModel(private val repository: SCPRepository = SCPRepository()) : ViewModel() {
+class SCPAddViewModel(
+    private val repository: SCPRepository = SCPRepository(),
+    private val sharedPreferencesRepository: SharedPreferencesRepository
+) : ViewModel() {
 
     private val _classificationTypes = MutableLiveData<List<String>>()
     val classificationTypes: LiveData<List<String>> = _classificationTypes
@@ -46,13 +50,16 @@ class SCPAddViewModel(private val repository: SCPRepository = SCPRepository()) :
         viewModelScope.launch {
             try {
                 val series = calculateSeries(id)
+                val creator = sharedPreferencesRepository.getUsername() // Get the username here
+
                 val scpRequest = SCPRequest(
                     scp_id = id,
                     title = title,
                     classification = classification,
                     url = url,
                     description = description,
-                    series = series
+                    series = series,
+                    creator = creator // Pass the username as the creator
                 )
 
                 val response = repository.createSCP(scpRequest)
@@ -84,4 +91,5 @@ class SCPAddViewModel(private val repository: SCPRepository = SCPRepository()) :
         }
     }
 }
+
 
