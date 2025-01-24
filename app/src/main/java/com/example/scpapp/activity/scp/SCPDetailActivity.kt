@@ -84,6 +84,7 @@ class SCPDetailActivity : AppCompatActivity() {
             "thaumiel" -> R.drawable.ic_scp_thaumiel
             "ticonderoga" -> R.drawable.ic_scp_ticonderoga
             "archon" -> R.drawable.ic_scp_archon
+            "uncontained" -> R.drawable.ic_scp_uncontained
             else -> {
                 Log.d("SCPDetailActivity", "No image for this classification: ${details.classification}")
                 0 // Default value, no image

@@ -31,11 +31,11 @@ class SCPAdapter(private val onItemClick: (SCP) -> Unit) :
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(scp: SCP) {
-            // Bind the SCP ID and Title (e.g., "SCP-173: The Statue")
+            // Bind the SCP ID, Title and classification (e.g., "SCP-173: The Statue - Euclid")
             binding.textViewSCPTitle.text = "${scp.id}: ${scp.title} - ${scp.classification}"
 
-            // Bind the SCP Classification (e.g., "Keter")
-            binding.textViewSCPClassification.text = "By: ${scp.creator}"
+            // Check if creator is null and set it to "Unknown" if true
+            binding.textViewSCPClassification.text = "By: ${scp.creator ?: "Unknown"}"
 
             // Bind the SCP Rating (e.g., "93")
             binding.textViewSCPRating.text = scp.rating.toString()
